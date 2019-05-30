@@ -19,17 +19,6 @@ function Book({ title, author, photo }) {
   );
 }
 
-/*
-  function ProgressBar({ currentStep, totalSteps, progressBarStyles, viewStyles, width }) {
-  const totalProgress = (currentStep * width) / totalSteps;
-  return (
-    <View style={[styles.container, viewStyles, { width }]}>
-      <View style={[styles.progress, { width: totalProgress }, progressBarStyles]} />
-    </View>
-  );
-}
-*/
-
 Book.propTypes = {
   title: PropTypes.string,
   author: PropTypes.string,
@@ -42,13 +31,3 @@ Book.defaultProps = {
 }
 
 export default Book;
-
-/*
-        <Image
-          source={require('/react-native/img/favicon.png')}
-        />
-        <Image
-          style={{width: 50, height: 50}}
-          source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
-        />
-*/
