@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { FONT_SIZE_LARGE, FONT_SIZE_MEDIUM } from '../../../constants/dimensions';
-import { white } from '../../../constants/colors';
+import { FONT_SIZE_LARGE, FONT_SIZE_MEDIUM } from '../../../../../constants/dimensions';
+import { white } from '../../../../../constants/colors';
 
 const IMAGE_HEIGHT = 80;
 const IMAGE_WIDTH = IMAGE_HEIGHT * 0.7;
