@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 function Book({ title, author, photo }) {
   return (
-    <View style={styles.container} >
+    <View style={styles.container}>
       <Image
         source={photo && {uri: photo} || require('../../assets/book_placeholder.png')}
         style={styles.coverImage}

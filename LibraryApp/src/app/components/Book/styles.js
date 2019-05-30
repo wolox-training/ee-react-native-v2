@@ -2,8 +2,11 @@ import { StyleSheet } from 'react-native';
 import { FONT_SIZE_LARGE, FONT_SIZE_MEDIUM } from '../../../constants/dimensions';
 import { white } from '../../../constants/colors';
 
-const IMAGE_SIZE = 80;
+const IMAGE_HEIGHT = 80;
+const IMAGE_WIDTH = IMAGE_HEIGHT * 0.7;
+const IMAGE_HORIZONTAL_MARGIN = (IMAGE_HEIGHT - IMAGE_WIDTH) / 2;
 const BOOK_CONTAINER_MARGIN_HORIZONTAL = 15;
+const BOOK_CONTAINER_MARGIN_BOTTOM = 15;
 const BOOK_CONTAINER_HEIGHT = 120;
 const BOOK_CONTAINER_PADDING = 20;
 const RIGHT_CONTAINER_MARGIN_HORIZONTAL = 20;
@@ -16,11 +19,13 @@ export default StyleSheet.create({
     height: BOOK_CONTAINER_HEIGHT,
     padding: BOOK_CONTAINER_PADDING,
     borderRadius: BOOK_CONTAINER_BORDER_RADIUS,
-    backgroundColor: white
+    backgroundColor: white,
+    marginBottom: BOOK_CONTAINER_MARGIN_BOTTOM
   },
   coverImage: {
-    width: IMAGE_SIZE,
-    height: IMAGE_SIZE
+    height: IMAGE_HEIGHT,
+    width: IMAGE_WIDTH,
+    marginHorizontal: IMAGE_HORIZONTAL_MARGIN
   },
   rightContainer: {
     justifyContent: 'flex-start',

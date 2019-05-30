@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 
-import Book from './components/Book';
-import * as books from '../books.json';
+import BookList from './components/BookList';
 import styles from './styles';
 
-class App extends Component {
+const booksTest = require('../books.json');
 
+class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Book title={books[0].title} author={books[0].author} photo={books[0].image_url}/>
+        <BookList data={booksTest}/>
       </View>
     );
   }
