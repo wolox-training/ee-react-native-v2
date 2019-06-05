@@ -4,14 +4,16 @@ import { View, Text, Image } from 'react-native';
 import styles from './styles';
 import PropTypes from 'prop-types';
 
+import placeholderCover from '../../assets/book_placeholder.png';
+
 function Book({ title, author, photo }) {
   return (
     <View style={styles.container} >
       <Image
-        source={photo && {uri: photo} || require('../../assets/book_placeholder.png')}
+        source={photo ? {uri: photo} : placeholderCover}
         style={styles.coverImage}
       />
-      <View style={styles.rightContainer} >
+      <View style={styles.rightContainer}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.author}>{author}</Text>
       </View>
@@ -26,8 +28,8 @@ Book.propTypes = {
 };
 
 Book.defaultProps = {
-  title: 'No title',
-  author: 'No author'
+  title: 'Unknown title',
+  author: 'Unknown author'
 }
 
 export default Book;

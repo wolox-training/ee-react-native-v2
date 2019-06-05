@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 
+// TODO: bring these books from api request if needed later in training
+import { books } from '../books';
+
 import Book from './components/Book';
-import * as books from '../books.json';
 import styles from './styles';
 
-class App extends Component {
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Book title={books[0].title} author={books[0].author} photo={books[0].image_url}/>
-      </View>
-    );
-  }
-};
+function App() {
+  return (
+    <View style={styles.container}>
+      {/* TODO: to send all books instead of one only */}
+      <Book title={books[0].title} author={books[0].author} photo={books[2].image_url} />
+    </View>
+  );
+}
 
 export default App;
