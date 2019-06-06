@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, Image } from 'react-native';
 
 import styles from './styles';
 import PropTypes from 'prop-types';
 
+import bookPlaceholder from '../../../../assets/book_placeholder.png'
+
 function Book({ title, author, photo }) {
   return (
     <View style={styles.container}>
       <Image
-        source={photo && {uri: photo} || require('../../assets/book_placeholder.png')}
+        source={photo && {uri: photo} || bookPlaceholder }
         style={styles.coverImage}
       />
       <View style={styles.rightContainer} >

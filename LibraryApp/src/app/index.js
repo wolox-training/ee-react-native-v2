@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import BookList from './components/BookList';
 import styles from './styles';
 
-const booksTest = require('../books.json');
+import booksTest from '../books.json';
 
 class App extends Component {
   render() {

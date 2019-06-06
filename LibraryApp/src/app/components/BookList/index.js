@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, FlatList } from 'react-native';
 
 import styles from './styles';
-import Book from '../Book';
+import Book from './components/Book';
 
 class BookList extends Component {
   keyExtractor = ({ id }) => id;

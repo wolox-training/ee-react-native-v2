@@ -14,6 +14,7 @@ const BOOK_CONTAINER_BORDER_RADIUS = 10;
 
 export default StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'row',
     marginHorizontal: BOOK_CONTAINER_MARGIN_HORIZONTAL,
     height: BOOK_CONTAINER_HEIGHT,
@@ -29,7 +30,8 @@ export default StyleSheet.create({
   },
   rightContainer: {
     justifyContent: 'flex-start',
-    marginHorizontal: RIGHT_CONTAINER_MARGIN_HORIZONTAL
+    marginHorizontal: RIGHT_CONTAINER_MARGIN_HORIZONTAL,
+    width: '60%'
   },
   title: {
     fontWeight: 'bold',
