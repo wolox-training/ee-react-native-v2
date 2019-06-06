@@ -1,10 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
-
 // TODO: bring these books from api request if needed later in training
+import Book from '@components/Book';
+
 import { books } from '../books';
 
-import Book from './components/Book';
 import styles from './styles';
 
 function App() {

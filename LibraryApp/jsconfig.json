@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@app": ["./src/app"],
+        "@assets": ["./src/app/assets"],
+        "@components": ["./src/app/components"],
+        "@config": ["./src/config"],
+        "@constants": ["./src/constants"],
+        "@redux": ["./src/redux"],
+        "@services": ["./src/services"],
+        "@utils": ["./src/utils"]
+    }
+  }
+}
