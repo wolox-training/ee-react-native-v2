@@ -4,7 +4,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import PropTypes from 'prop-types';
 
-const defaultPlaceholder = '../../../../assets/book_placeholder.png';
+import defaultPlaceholder from '../../../../assets/book_placeholder.png';
 
 class Book extends Component {
   onPress = () => this.props.onPress(this.props.item);
@@ -12,11 +12,10 @@ class Book extends Component {
   render() {
     const { item } = this.props;
     const { image_url: coverImg, title, author } = item;
-    // debugger;
     return (
       <TouchableOpacity style={styles.container} onPress={this.onPress}>
         <Image
-          source={coverImg && {uri: coverImg} || require(defaultPlaceholder)}
+          source={coverImg && {uri: coverImg} || defaultPlaceholder}
           style={styles.coverImage}
         />
         <View style={styles.rightContainer} >
@@ -46,15 +45,3 @@ Book.defaultProps = {
 }
 
 export default Book;
-
-/*
-   {
-     "id":5,
-     "author":"Christopher Pike",
-     "title":"Scavenger Hunt",
-     "genre":"suspense",
-     "publisher":"Pocket Books",
-     "year":"1989",
-     "image_url":"http://wolox-training.s3.amazonaws.com/uploads/6963511-M.jpg"
-  },
-*/

@@ -5,7 +5,7 @@ class BookDetail extends Component {
   render() {
     return (
       <View>
-        <Text>I'm the book detail :)</Text>
+        <Text>{/* TODO: to give a proper detail to each book */}</Text>
       </View>
     );
   }

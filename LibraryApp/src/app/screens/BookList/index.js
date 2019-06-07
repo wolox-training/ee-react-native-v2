@@ -6,12 +6,11 @@ import styles from './styles';
 import Book from './components/Book';
 import Routes from '../../../constants/routes';
 
-const booksTest = require('../../../books.json');
+import booksTest from '../../../books.json';
 
 class BookList extends Component {
   goToDetails = item => {
     const { navigation } = this.props;
-    // debugger;
     navigation.dispatch(
       NavigationActions.navigate({
         routeName: Routes.BookDetail,
