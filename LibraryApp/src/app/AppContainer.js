@@ -1,10 +1,10 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
+import Routes from '../constants/routes';
+import { blackSqueeze } from '../constants/colors';
+
 import BookList from './screens/BookList';
 import BookDetail from './screens/BookDetail';
-import Routes from '../constants/routes';
-
-import { blackSqueeze } from '../constants/colors';
 
 const navigationOptions = {
   cardStyle: {
@@ -12,15 +12,17 @@ const navigationOptions = {
   }
 };
 
-const BooksNavigator = createStackNavigator({
-  [Routes.BookList]: {
-    screen: BookList,
-    navigationOptions: () => ({
-      title: 'Library app'
-    })
+const BooksNavigator = createStackNavigator(
+  {
+    [Routes.BookList]: {
+      screen: BookList,
+      navigationOptions: () => ({
+        title: 'Library app'
+      })
+    },
+    [Routes.BookDetail]: { screen: BookDetail }
   },
-  [Routes.BookDetail]: { screen: BookDetail }
-}, navigationOptions
+  navigationOptions
 );
 
 export default createAppContainer(BooksNavigator);
