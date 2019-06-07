@@ -1,7 +1,5 @@
 import { StyleSheet } from 'react-native';
-
-// import { blackSqueeze } from '@constants/colors';
-const yellow = '#FFA';
+import { blackSqueeze } from '@constants/colors';
 
 const PADDING_TEST = 20;
 
