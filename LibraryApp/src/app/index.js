@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-
-import BookList from './components/BookList';
+// TODO: bring these books from api request if needed later in training
+import BookList from '@components/BookList';
 import styles from './styles';
 
-import booksTest from '../books.json';
+import { books } from '../books.js';
 
 class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <BookList data={booksTest}/>
+        <BookList data={books}/>
       </View>
     );
   }
