@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-
-import defaultPlaceholder from '../../../../assets/book_placeholder.png';
+import defaultPlaceholder from '@assets/book_placeholder.png';
 
 import styles from './styles';
 

@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { View, FlatList } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
-
-import Routes from '../../../constants/routes';
-import { books } from '../../../books';
+import Routes from '@constants/routes';
+import { books } from '@directory/books';
 
 import styles from './styles';
 import Book from './components/Book';

@@ -9,6 +9,7 @@
         "@config": "./src/config",
         "@constants": "./src/constants",
         "@redux": "./src/redux",
+        "@screens": "./src/app/screens",
         "@services": "./src/services",
         "@utils": "./src/utils"
       }

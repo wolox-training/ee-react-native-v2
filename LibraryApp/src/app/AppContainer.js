@@ -1,10 +1,8 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-
-import Routes from '../constants/routes';
-import { blackSqueeze } from '../constants/colors';
-
-import BookList from './screens/BookList';
-import BookDetail from './screens/BookDetail';
+import Routes from '@constants/routes';
+import { blackSqueeze } from '@constants/colors';
+import BookList from '@screens/BookList';
+import BookDetail from '@screens/BookDetail';
 
 const navigationOptions = {
   cardStyle: {
