@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
+import PropTypes from 'prop-types';
+import defaultPlaceholder from '@assets/book_placeholder.png';
+import CustomButton from '@components/CustomButton';
+
+import styles from './styles';
 
 class BookDetail extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -10,12 +15,58 @@ class BookDetail extends Component {
   };
 
   render() {
+    const { item } = this.props.navigation.state.params;
+    const { image_url: coverImage, title, author, year, genre } = item;
     return (
-      <View>
-        <Text>{/* TODO: to give a proper detail to each book */}</Text>
+      <View style={styles.container}>
+        <View style={styles.detailsContainer}>
+          <Image
+            source={(coverImage && { uri: coverImage }) || defaultPlaceholder}
+            style={styles.coverImage}
+          />
+          <View style={styles.rightContainer}>
+            <Text style={styles.title}>{title}</Text>
+            {/* TODO: Make availability updatable */}
+            <Text style={styles.availability}>Available</Text>
+            <Text style={styles.commonLabel}>{author}</Text>
+            <Text style={styles.commonLabel}>{year}</Text>
+            <Text style={styles.commonLabel}>{genre}</Text>
+          </View>
+        </View>
+        <View style={styles.buttonsContainer}>
+          <CustomButton
+            title="Add to wishlist"
+            whiteTheme
+            buttonStyles={styles.buttonsMargin}
+            textStyles={styles.buttonTextStyle}
+          />
+          <CustomButton
+            title="Rent"
+            buttonStyles={styles.buttonsMargin}
+            textStyles={styles.buttonTextStyle}
+          />
+        </View>
       </View>
     );
   }
 }
+
+BookDetail.propTypes = {
+  navigation: PropTypes.shape({
+    state: PropTypes.shape({
+      params: PropTypes.shape({
+        item: PropTypes.shape({
+          id: PropTypes.number,
+          author: PropTypes.string,
+          title: PropTypes.string,
+          genre: PropTypes.string,
+          publisher: PropTypes.string,
+          year: PropTypes.string,
+          image_url: PropTypes.string
+        })
+      })
+    })
+  })
+};
 
 export default BookDetail;

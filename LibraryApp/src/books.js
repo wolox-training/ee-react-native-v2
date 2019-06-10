@@ -13,7 +13,7 @@ export const books = [
     id: 2,
     author: 'Christopher Pike',
     title: 'Scavenger Hunt',
-    genre: 'other',
+    genre: 'Other',
     publisher: 'Pocket Books',
     year: '1989',
     image_url: null
@@ -22,7 +22,7 @@ export const books = [
     id: 3,
     author: 'Lois Duncan',
     title: 'Locked in time',
-    genre: 'suspense',
+    genre: 'Suspense',
     publisher: 'Little, Brown',
     year: '1985',
     image_url: 'http://wolox-training.s3.amazonaws.com/uploads/6942334-M.jpg'
@@ -31,7 +31,7 @@ export const books = [
     id: 4,
     author: 'Christopher Pike',
     title: 'Scavenger Hunt',
-    genre: 'suspense',
+    genre: 'Suspense',
     publisher: 'Pocket Books',
     year: '1989',
     image_url: 'http://wolox-training.s3.amazonaws.com/uploads/6963511-M.jpg'
@@ -40,7 +40,7 @@ export const books = [
     id: 5,
     author: 'Christopher Pike',
     title: 'Scavenger Hunt',
-    genre: 'suspense',
+    genre: 'Suspense',
     publisher: 'Pocket Books',
     year: '1989',
     image_url: 'http://wolox-training.s3.amazonaws.com/uploads/6963511-M.jpg'
@@ -49,7 +49,7 @@ export const books = [
     id: 6,
     author: 'Paula Hawkins',
     title: 'The Girl on the Train\n',
-    genre: 'suspense',
+    genre: 'Suspense',
     publisher: 'Riverhead Books',
     year: '2015',
     image_url: 'http://wolox-training.s3.amazonaws.com/uploads/content.jpeg'
@@ -58,7 +58,7 @@ export const books = [
     id: 7,
     author: 'Anthony Doerr',
     title: 'All the Light We Cannot See',
-    genre: 'suspense',
+    genre: 'Suspense',
     publisher: 'Scribner',
     year: '2014',
     image_url: 'http://wolox-training.s3.amazonaws.com/uploads/content.jpeg'
@@ -67,7 +67,7 @@ export const books = [
     id: 8,
     author: 'John Katzenbach',
     title: 'The analyst',
-    genre: 'thriller',
+    genre: 'Thriller',
     publisher: 'Ballantine Books',
     year: '2003',
     image_url:
@@ -77,7 +77,7 @@ export const books = [
     id: 9,
     author: 'Andy Weir',
     title: 'The Martian',
-    genre: 'fiction',
+    genre: 'Fiction',
     publisher: 'Crown Publishing Group',
     year: '2011',
     image_url: 'http://wolox-training.s3.amazonaws.com/uploads/41DNuJfahyL._SX322_BO1_204_203_200_.jpg'
