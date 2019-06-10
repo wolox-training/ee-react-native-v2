@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import defaultPlaceholder from '@assets/book_placeholder.png';
 import CustomButton from '@components/CustomButton';
@@ -24,14 +24,14 @@ class BookDetail extends Component {
             source={(coverImage && { uri: coverImage }) || defaultPlaceholder}
             style={styles.coverImage}
           />
-          <View style={styles.rightContainer}>
+          <ScrollView style={styles.rightContainer}>
             <Text style={styles.title}>{title}</Text>
             {/* TODO: Make availability updatable */}
             <Text style={styles.availability}>Available</Text>
             <Text style={styles.commonLabel}>{author}</Text>
             <Text style={styles.commonLabel}>{year}</Text>
             <Text style={styles.commonLabel}>{genre}</Text>
-          </View>
+          </ScrollView>
         </View>
         <View style={styles.buttonsContainer}>
           <CustomButton

@@ -9,7 +9,7 @@ const IMAGE_HEIGHT = CONTAINER_HEIGHT * 0.4;
 const IMAGE_WIDTH = IMAGE_HEIGHT * 0.65;
 const RIGHT_CONTAINER_PADDING_H = 20;
 /* FONT HEIGHTS */
-const FONT_HEIGHT_XBIG = 30;
+const FONT_HEIGHT_XBIG = 28;
 const FONT_HEIGHT_MEDIUM = 16;
 
 export default StyleSheet.create({
@@ -17,7 +17,6 @@ export default StyleSheet.create({
     height: CONTAINER_HEIGHT,
     backgroundColor: white,
     borderRadius: 10,
-    borderWidth: 1,
     margin: CONTAINER_MARGIN,
     paddingHorizontal: CONTAINER_PADDING_H,
     paddingVertical: CONTAINER_PADDING_V
@@ -27,6 +26,7 @@ export default StyleSheet.create({
     height: '50%'
   },
   rightContainer: {
+    flex: 1,
     paddingHorizontal: RIGHT_CONTAINER_PADDING_H
   },
   coverImage: {

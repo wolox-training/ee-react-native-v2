@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 
 import styles from './styles';
@@ -18,8 +18,8 @@ class CustomButton extends Component {
 }
 
 CustomButton.propTypes = {
-  buttonStyles: PropTypes.number,
-  textStyles: PropTypes.number,
+  buttonStyles: ViewPropTypes.style,
+  textStyles: Text.propTypes.style,
   title: PropTypes.string.isRequired,
   whiteTheme: PropTypes.bool
 };
