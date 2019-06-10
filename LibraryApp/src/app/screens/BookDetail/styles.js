@@ -5,9 +5,12 @@ const CONTAINER_HEIGHT = 300;
 const CONTAINER_MARGIN = 18;
 const CONTAINER_PADDING_V = 20;
 const CONTAINER_PADDING_H = 30;
+const CONTAINER_BORDER_RADIUS = 10;
 const IMAGE_HEIGHT = CONTAINER_HEIGHT * 0.4;
 const IMAGE_WIDTH = IMAGE_HEIGHT * 0.65;
 const RIGHT_CONTAINER_PADDING_H = 20;
+const BUTTONS_CONTAINER_PADDING_V = 16;
+const BUTTON_MARGIN_V = 5;
 /* FONT HEIGHTS */
 const FONT_HEIGHT_XBIG = 28;
 const FONT_HEIGHT_MEDIUM = 16;
@@ -16,7 +19,7 @@ export default StyleSheet.create({
   container: {
     height: CONTAINER_HEIGHT,
     backgroundColor: white,
-    borderRadius: 10,
+    borderRadius: CONTAINER_BORDER_RADIUS,
     margin: CONTAINER_MARGIN,
     paddingHorizontal: CONTAINER_PADDING_H,
     paddingVertical: CONTAINER_PADDING_V
@@ -41,16 +44,15 @@ export default StyleSheet.create({
     color: greenDeco,
     fontWeight: 'bold'
   },
-  commonLabel: {},
   buttonsContainer: {
     height: '50%',
     justifyContent: 'space-between',
-    paddingVertical: FONT_HEIGHT_MEDIUM
+    paddingVertical: BUTTONS_CONTAINER_PADDING_V
   },
   buttonsMargin: {
-    marginVertical: 5
+    marginVertical: BUTTON_MARGIN_V
   },
   buttonTextStyle: {
-    fontSize: 16
+    fontSize: FONT_HEIGHT_MEDIUM
   }
 });

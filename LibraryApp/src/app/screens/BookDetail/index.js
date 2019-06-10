@@ -28,9 +28,9 @@ class BookDetail extends Component {
             <Text style={styles.title}>{title}</Text>
             {/* TODO: Make availability updatable */}
             <Text style={styles.availability}>Available</Text>
-            <Text style={styles.commonLabel}>{author}</Text>
-            <Text style={styles.commonLabel}>{year}</Text>
-            <Text style={styles.commonLabel}>{genre}</Text>
+            <Text>{author}</Text>
+            <Text>{year}</Text>
+            <Text>{genre}</Text>
           </ScrollView>
         </View>
         <View style={styles.buttonsContainer}>
