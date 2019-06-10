@@ -7,11 +7,10 @@ import styles from './styles';
 class CustomButton extends Component {
   render() {
     const { title, whiteTheme, buttonStyles, textStyles } = this.props;
+    const titleToUpper = title.toUpperCase();
     return (
       <TouchableOpacity style={[styles.button, whiteTheme && styles.whiteThemeButton, buttonStyles]}>
-        <Text style={[styles.text, whiteTheme && styles.whiteThemeText, textStyles]}>
-          {title.toUpperCase()}
-        </Text>
+        <Text style={[styles.text, whiteTheme && styles.whiteThemeText, textStyles]}>{titleToUpper}</Text>
       </TouchableOpacity>
     );
   }

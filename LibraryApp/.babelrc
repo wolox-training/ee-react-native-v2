@@ -11,8 +11,7 @@
         "@redux": "./src/redux",
         "@screens": "./src/app/screens",
         "@services": "./src/services",
-        "@utils": "./src/utils",
-        "@rootDirectory": "./src"
+        "@utils": "./src/utils"
       }
     }]
   ]

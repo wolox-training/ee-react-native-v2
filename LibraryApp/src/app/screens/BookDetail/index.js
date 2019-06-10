@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import defaultPlaceholder from '@assets/book_placeholder.png';
 import CustomButton from '@components/CustomButton';
 
+import { ADD_TO_WISHLIST, RENT, UNAVAILABLE, AVAILABLE } from './constants';
 import styles from './styles';
 
 class BookDetail extends Component {
@@ -16,7 +17,7 @@ class BookDetail extends Component {
 
   render() {
     const { item } = this.props.navigation.state.params;
-    const { image_url: coverImage, title, author, year, genre } = item;
+    const { image_url: coverImage, title, author, year, genre, available } = item;
     return (
       <View style={styles.container}>
         <View style={styles.detailsContainer}>
@@ -26,8 +27,9 @@ class BookDetail extends Component {
           />
           <ScrollView style={styles.rightContainer}>
             <Text style={styles.title}>{title}</Text>
-            {/* TODO: Make availability updatable */}
-            <Text style={styles.availability}>Available</Text>
+            <Text style={available ? styles.available : styles.unavailable}>
+              {available ? AVAILABLE : UNAVAILABLE}
+            </Text>
             <Text>{author}</Text>
             <Text>{year}</Text>
             <Text>{genre}</Text>
@@ -35,13 +37,13 @@ class BookDetail extends Component {
         </View>
         <View style={styles.buttonsContainer}>
           <CustomButton
-            title="Add to wishlist"
+            title={ADD_TO_WISHLIST}
             whiteTheme
             buttonStyles={styles.buttonsMargin}
             textStyles={styles.buttonTextStyle}
           />
           <CustomButton
-            title="Rent"
+            title={RENT}
             buttonStyles={styles.buttonsMargin}
             textStyles={styles.buttonTextStyle}
           />
@@ -62,7 +64,8 @@ BookDetail.propTypes = {
           genre: PropTypes.string,
           publisher: PropTypes.string,
           year: PropTypes.string,
-          image_url: PropTypes.string
+          image_url: PropTypes.string,
+          available: PropTypes.bool
         })
       })
     })

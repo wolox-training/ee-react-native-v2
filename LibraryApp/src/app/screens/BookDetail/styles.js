@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { greenDeco, white } from '@constants/colors';
+import { greenDeco, white, red } from '@constants/colors';
 
 const CONTAINER_HEIGHT = 300;
 const CONTAINER_MARGIN = 18;
@@ -40,8 +40,12 @@ export default StyleSheet.create({
     fontSize: FONT_HEIGHT_XBIG,
     fontWeight: 'bold'
   },
-  availability: {
+  available: {
     color: greenDeco,
+    fontWeight: 'bold'
+  },
+  unavailable: {
+    color: red,
     fontWeight: 'bold'
   },
   buttonsContainer: {
