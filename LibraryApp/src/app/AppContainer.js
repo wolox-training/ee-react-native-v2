@@ -2,7 +2,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Routes from '@constants/routes';
 import { blackSqueeze } from '@constants/colors';
 import BookList from '@screens/BookList';
-import BookDetail from '@screens/BookDetail';
+import BookDetails from '@screens/BookDetails';
 
 const navigationOptions = {
   cardStyle: {
@@ -18,7 +18,7 @@ const BooksNavigator = createStackNavigator(
         title: 'Library app'
       })
     },
-    [Routes.BookDetail]: { screen: BookDetail }
+    [Routes.BookDetails]: { screen: BookDetails }
   },
   navigationOptions
 );

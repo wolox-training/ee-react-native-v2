@@ -1,4 +1,6 @@
-export default Routes = {
-  BookDetail: 'BookDetail',
+const Routes = {
+  BookDetails: 'BookDetails',
   BookList: 'BookList'
-}
+};
+
+export default Routes;
