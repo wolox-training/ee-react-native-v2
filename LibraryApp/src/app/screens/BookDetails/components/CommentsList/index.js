@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { View, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 
 import styles from './styles';
 import Comment from './components/Comment';
 
 class CommentsList extends Component {
-  renderItem = ({ item }) => {
-    return <Comment item={item} />;
-  };
+  renderItem = ({ item }) => <Comment item={item} />;
 
   keyExtractor = ({ id }) => id;
 
