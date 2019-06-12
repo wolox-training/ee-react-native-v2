@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native';
+import { blackSqueeze } from '@constants/colors';
 
 const PADDING_TEST = 20;
-const yellow = '#FFA';
 
 export default StyleSheet.create({
   container: {
     padding: PADDING_TEST,
-    backgroundColor: yellow
+    backgroundColor: blackSqueeze,
+    flex: 1
   }
 });

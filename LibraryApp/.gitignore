@@ -29,8 +29,9 @@ build/
 .gradle
 local.properties
 settings.json
-package-lock.json
 jsconfig.json
+.vscode/
+package-lock.json
 *.iml
 
 # node.js
