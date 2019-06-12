@@ -28,6 +28,9 @@ build/
 .idea
 .gradle
 local.properties
+settings.json
+package-lock.json
+jsconfig.json
 *.iml
 
 # node.js
