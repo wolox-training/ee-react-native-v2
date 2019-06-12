@@ -30,6 +30,8 @@ build/
 local.properties
 settings.json
 jsconfig.json
+.vscode/
+package-lock.json
 *.iml
 
 # node.js

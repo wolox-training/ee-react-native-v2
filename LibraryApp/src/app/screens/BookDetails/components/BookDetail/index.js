@@ -13,10 +13,7 @@ class BookDetail extends Component {
     return (
       <View style={styles.infoContainer}>
         <View style={styles.detailsContainer}>
-          <Image
-            source={(coverImage && { uri: coverImage }) || defaultPlaceholder}
-            style={styles.coverImage}
-          />
+          <Image source={coverImage ? { uri: coverImage } : defaultPlaceholder} style={styles.coverImage} />
           <ScrollView style={styles.rightContainer}>
             <Text style={styles.title}>{title}</Text>
             <Text style={available ? styles.available : styles.unavailable}>
