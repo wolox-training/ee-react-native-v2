@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 
 import styles from './styles';
@@ -13,9 +13,12 @@ class BookList extends Component {
   render() {
     const { data } = this.props;
     return (
-      <View style={styles.container}>
-        <FlatList data={data} renderItem={this.renderItem} keyExtractor={this.keyExtractor} />
-      </View>
+      <FlatList
+        data={data}
+        renderItem={this.renderItem}
+        keyExtractor={this.keyExtractor}
+        style={styles.container}
+      />
     );
   }
 }
