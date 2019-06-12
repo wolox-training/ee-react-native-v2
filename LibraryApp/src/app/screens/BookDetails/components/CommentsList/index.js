@@ -15,9 +15,12 @@ class CommentsList extends Component {
   render() {
     const { comments } = this.props;
     return (
-      <View style={styles.container}>
-        <FlatList data={comments} renderItem={this.renderItem} keyExtractor={this.keyExtractor} />
-      </View>
+      <FlatList
+        data={comments}
+        renderItem={this.renderItem}
+        keyExtractor={this.keyExtractor}
+        style={styles.container}
+      />
     );
   }
 }

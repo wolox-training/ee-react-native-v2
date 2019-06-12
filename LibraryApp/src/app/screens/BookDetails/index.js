@@ -1,32 +1,28 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import { shuffleArray } from '@utils/arrayUtils';
 
 import styles from './styles';
 import CommentsList from './components/CommentsList';
 import { comments } from './comments';
 import BookDetail from './components/BookDetail';
 
+const UNKNOWN_TITLE = 'Unknown title for the selected book';
+
 class BookDetails extends Component {
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state;
     return {
-      title: params ? params.item.title : 'Unknown title for the selected book'
+      title: params ? params.item.title : UNKNOWN_TITLE
     };
   };
 
   render() {
     const { item } = this.props.navigation.state.params;
-    const shuffledComments = shuffleArray(comments);
     return (
       <View style={styles.container}>
-        <View>
-          <BookDetail item={item} />
-        </View>
-        <View style={styles.commentsContainer}>
-          <CommentsList comments={shuffledComments} />
-        </View>
+        <BookDetail item={item} />
+        <CommentsList comments={comments} />
       </View>
     );
   }
