@@ -3,8 +3,8 @@ import { View, FlatList } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
 import Routes from '@constants/routes';
-import { books } from '@directory/books';
 
+import { books } from './books';
 import styles from './styles';
 import Book from './components/Book';
 
