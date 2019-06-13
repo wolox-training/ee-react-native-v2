@@ -8,7 +8,11 @@ import { books } from './books';
 import styles from './styles';
 import Book from './components/Book';
 
+const APP_TITLE = 'LIBRARY';
+
 class BookList extends Component {
+  static navigationOptions = () => ({ title: APP_TITLE });
+
   goToDetails = item => {
     const { navigation } = this.props;
     navigation.dispatch(
