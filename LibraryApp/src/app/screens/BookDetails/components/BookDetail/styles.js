@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 import { greenDeco, white, red } from '@constants/colors';
 
 const CONTAINER_HEIGHT = 300;
-const CONTAINER_MARGIN = 18;
 const CONTAINER_PADDING_V = 20;
 const CONTAINER_PADDING_H = 30;
 const CONTAINER_BORDER_RADIUS = 10;
@@ -16,11 +15,10 @@ const FONT_HEIGHT_XBIG = 28;
 const FONT_HEIGHT_MEDIUM = 16;
 
 export default StyleSheet.create({
-  container: {
+  infoContainer: {
     height: CONTAINER_HEIGHT,
     backgroundColor: white,
     borderRadius: CONTAINER_BORDER_RADIUS,
-    margin: CONTAINER_MARGIN,
     paddingHorizontal: CONTAINER_PADDING_H,
     paddingVertical: CONTAINER_PADDING_V
   },

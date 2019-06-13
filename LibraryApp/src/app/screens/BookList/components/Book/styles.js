@@ -3,7 +3,6 @@ import { white } from '@constants/colors';
 import { FONT_SIZE_LARGE, FONT_SIZE_MEDIUM } from '@constants/dimensions';
 
 const IMAGE_HEIGHT = 80;
-// eslint-disable-next-line no-magic-numbers
 const IMAGE_WIDTH = IMAGE_HEIGHT * 0.7;
 const IMAGE_HORIZONTAL_MARGIN = (IMAGE_HEIGHT - IMAGE_WIDTH) / 2;
 const BOOK_CONTAINER_MARGIN_BOTTOM = 15;

@@ -13,7 +13,7 @@ class BookList extends Component {
     const { navigation } = this.props;
     navigation.dispatch(
       NavigationActions.navigate({
-        routeName: Routes.BookDetail,
+        routeName: Routes.BookDetails,
         params: { item }
       })
     );

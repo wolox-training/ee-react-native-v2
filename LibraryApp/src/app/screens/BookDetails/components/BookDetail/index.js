@@ -8,18 +8,10 @@ import { ADD_TO_WISHLIST, RENT, UNAVAILABLE, AVAILABLE } from './constants';
 import styles from './styles';
 
 class BookDetail extends Component {
-  static navigationOptions = ({ navigation }) => {
-    const { params } = navigation.state;
-    return {
-      title: params ? params.item.title : 'Unknown title for the selected book'
-    };
-  };
-
   render() {
-    const { item } = this.props.navigation.state.params;
-    const { image_url: coverImage, title, author, year, genre, available } = item;
+    const { image_url: coverImage, title, author, year, genre, available } = this.props.item;
     return (
-      <View style={styles.container}>
+      <View style={styles.infoContainer}>
         <View style={styles.detailsContainer}>
           <Image source={coverImage ? { uri: coverImage } : defaultPlaceholder} style={styles.coverImage} />
           <ScrollView style={styles.rightContainer}>
@@ -51,21 +43,15 @@ class BookDetail extends Component {
 }
 
 BookDetail.propTypes = {
-  navigation: PropTypes.shape({
-    state: PropTypes.shape({
-      params: PropTypes.shape({
-        item: PropTypes.shape({
-          id: PropTypes.number,
-          author: PropTypes.string,
-          title: PropTypes.string,
-          genre: PropTypes.string,
-          publisher: PropTypes.string,
-          year: PropTypes.string,
-          image_url: PropTypes.string,
-          available: PropTypes.bool
-        })
-      })
-    })
+  item: PropTypes.shape({
+    id: PropTypes.number,
+    author: PropTypes.string,
+    title: PropTypes.string,
+    genre: PropTypes.string,
+    publisher: PropTypes.string,
+    year: PropTypes.string,
+    image_url: PropTypes.string,
+    available: PropTypes.bool
   })
 };
 
