@@ -1,13 +1,18 @@
 import React from 'react';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import Routes from '@constants/routes';
-import { blackSqueeze } from '@constants/colors';
+import { blackSqueeze, pictonBlue } from '@constants/colors';
 import BookList from '@screens/BookList';
 import BookDetails from '@screens/BookDetails';
+import EmptyScreen from '@screens/EmptyScreen';
 import { Image } from 'react-native';
 
 import headerImg from './assets/bc_nav_bar.png';
 import backImg from './assets/ic_back.png';
+import libraryImg from './assets/ic_library.png';
+import libraryImgActive from './assets/ic_library_active.png';
+import settingsImg from './assets/ic_settings.png';
+import settingsImgActive from './assets/ic_settings_active.png';
 import styles from './styles';
 
 const BooksNavigator = createStackNavigator(
@@ -30,4 +35,36 @@ const BooksNavigator = createStackNavigator(
   }
 );
 
-export default createAppContainer(BooksNavigator);
+const TabNavigator = createBottomTabNavigator(
+  {
+    [Routes.Library]: BooksNavigator,
+    [Routes.EmptyScreen]: EmptyScreen
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused }) => {
+        const { routeName } = navigation.state;
+        let tabIcon;
+        switch (routeName) {
+          case Routes.Library:
+            tabIcon = <Image source={focused ? libraryImgActive : libraryImg} style={styles.tabIcon} />;
+            break;
+          case Routes.EmptyScreen:
+            tabIcon = <Image source={focused ? settingsImgActive : settingsImg} style={styles.tabIcon} />;
+            break;
+          default:
+            tabIcon = null;
+            break;
+        }
+        return tabIcon;
+      }
+    }),
+    tabBarOptions: {
+      activeTintColor: pictonBlue,
+      labelStyle: styles.tabLabelStyles,
+      style: styles.tabBarStyles
+    }
+  }
+);
+
+export default createAppContainer(TabNavigator);
