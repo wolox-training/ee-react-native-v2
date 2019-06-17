@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
 import Routes from '@constants/routes';
@@ -8,7 +8,11 @@ import { books } from './books';
 import styles from './styles';
 import Book from './components/Book';
 
+const APP_TITLE = 'LIBRARY';
+
 class BookList extends Component {
+  static navigationOptions = () => ({ title: APP_TITLE });
+
   goToDetails = item => {
     const { navigation } = this.props;
     navigation.dispatch(
@@ -25,9 +29,12 @@ class BookList extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <FlatList data={books} renderItem={this.renderItem} keyExtractor={this.keyExtractor} />
-      </View>
+      <FlatList
+        data={books}
+        renderItem={this.renderItem}
+        keyExtractor={this.keyExtractor}
+        style={styles.container}
+      />
     );
   }
 }
