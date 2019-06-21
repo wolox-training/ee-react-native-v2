@@ -9,6 +9,8 @@ const BACK_IMG_LEFT_OFFSET = 10;
 const TAB_ICON_SIZE = 30;
 const TAB_BAR_HEIGHT = 60;
 const TAB_BAR_PADDING_TOP = 10;
+const LOGOUT_RIGHT = 10;
+const LOGOUT_WIDTH = 70;
 
 export default StyleSheet.create({
   container: {
@@ -46,6 +48,7 @@ export default StyleSheet.create({
   logoutButtonStyle: {
     backgroundColor: transparent,
     borderColor: transparent,
-    width: 150
+    right: LOGOUT_RIGHT,
+    width: LOGOUT_WIDTH
   }
 });
