@@ -2,10 +2,7 @@ import React from 'react';
 
 import App from './src/app';
 
-if (__DEV__) {
-  // eslint-disable-next-line no-console
-  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
-}
+if (__DEV__) import('./ReactotronConfig');
 
 export default function index() {
   return <App />;

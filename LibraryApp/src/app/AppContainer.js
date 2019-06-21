@@ -40,7 +40,7 @@ const TabNavigator = createBottomTabNavigator(
   {
     [Routes.Library]: BooksNavigator,
     [Routes.EmptyScreen]: EmptyScreen,
-    [Routes.Login]: { screen: Login }
+    [Routes.Login]: Login
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
