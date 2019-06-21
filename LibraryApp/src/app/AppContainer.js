@@ -35,36 +35,37 @@ const BooksNavigator = createStackNavigator(
   }
 );
 
-const TabNavigator = createBottomTabNavigator(
-  {
-    [Routes.Library]: BooksNavigator,
-    [Routes.EmptyScreen]: EmptyScreen
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused }) => {
-        const { routeName } = navigation.state;
-        let tabIcon;
-        switch (routeName) {
-          case Routes.Library:
-            tabIcon = <Image source={focused ? libraryImgActive : libraryImg} style={styles.tabIcon} />;
-            break;
-          case Routes.EmptyScreen:
-            tabIcon = <Image source={focused ? settingsImgActive : settingsImg} style={styles.tabIcon} />;
-            break;
-          default:
-            tabIcon = null;
-            break;
-        }
-        return tabIcon;
+const tabNavigatorScreens = {
+  [Routes.Library]: BooksNavigator,
+  [Routes.EmptyScreen]: EmptyScreen
+};
+
+const defaultTabNavigationOptions = {
+  defaultNavigationOptions: ({ navigation }) => ({
+    tabBarIcon: ({ focused }) => {
+      const { routeName } = navigation.state;
+      let tabIcon;
+      switch (routeName) {
+        case Routes.Library:
+          tabIcon = <Image source={focused ? libraryImgActive : libraryImg} style={styles.tabIcon} />;
+          break;
+        case Routes.EmptyScreen:
+          tabIcon = <Image source={focused ? settingsImgActive : settingsImg} style={styles.tabIcon} />;
+          break;
+        default:
+          tabIcon = null;
+          break;
       }
-    }),
-    tabBarOptions: {
-      activeTintColor: pictonBlue,
-      labelStyle: styles.tabLabelStyles,
-      style: styles.tabBarStyles
+      return tabIcon;
     }
+  }),
+  tabBarOptions: {
+    activeTintColor: pictonBlue,
+    labelStyle: styles.tabLabelStyles,
+    style: styles.tabBarStyles
   }
-);
+};
+
+const TabNavigator = createBottomTabNavigator(tabNavigatorScreens, defaultTabNavigationOptions);
 
 export default createAppContainer(TabNavigator);
