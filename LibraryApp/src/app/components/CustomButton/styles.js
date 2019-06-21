@@ -8,7 +8,9 @@ export default StyleSheet.create({
   button: {
     alignItems: 'center',
     backgroundColor: pictonBlue,
+    borderColor: pictonBlue,
     borderRadius: BUTTON_HEIGHT,
+    borderWidth: BORDER_WIDTH_MEDIUM,
     height: BUTTON_HEIGHT,
     justifyContent: 'center'
   },
@@ -18,8 +20,7 @@ export default StyleSheet.create({
   },
   whiteThemeButton: {
     backgroundColor: white,
-    borderColor: pictonBlue,
-    borderWidth: BORDER_WIDTH_MEDIUM
+    borderColor: pictonBlue
   },
   whiteThemeText: {
     color: pictonBlue
