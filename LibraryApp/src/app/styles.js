@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { blackSqueeze, white } from '@constants/colors';
+import { blackSqueeze, white, transparent } from '@constants/colors';
 import { FONT_SIZE_MEDIUM } from '@constants/dimensions';
 import { isIOS } from '@constants/platform';
 
@@ -42,5 +42,10 @@ export default StyleSheet.create({
   tabBarStyles: {
     height: TAB_BAR_HEIGHT,
     paddingTop: TAB_BAR_PADDING_TOP
+  },
+  logoutButtonStyle: {
+    backgroundColor: transparent,
+    borderColor: transparent,
+    width: 150
   }
 });
