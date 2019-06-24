@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
 import Routes from '@constants/routes';
+import { isPasswordValid, isEmailValid } from '@utils/validations';
 
 import Login from './layout';
+import { EMAIL_ERROR, PASSWORD_ERROR } from './constants';
 
 class LoginContainer extends Component {
   state = {
     email: '',
-    password: ''
+    password: '',
+    emailError: null,
+    passwordError: null
   };
 
   onEmailChange = email => this.setState({ email });
@@ -17,17 +21,26 @@ class LoginContainer extends Component {
 
   handleSubmit = () => {
     const { dispatch } = this.props.navigation;
-    // TENGO EL CONTENIDO DE LOS INPUTS VIEJAAA
-    console.log({ ...this.state });
-    return dispatch(
-      NavigationActions.navigate({
-        routeName: Routes.Library
-      })
+    const { email, password } = this.state;
+    const isValidEmail = isEmailValid(email);
+    const isValidPassword = isPasswordValid(password);
+    this.setState({
+      emailError: isValidEmail ? null : EMAIL_ERROR,
+      passwordError: isValidPassword ? null : PASSWORD_ERROR
+    });
+    return (
+      isValidEmail &&
+      isValidPassword &&
+      dispatch(
+        NavigationActions.navigate({
+          routeName: Routes.Library
+        })
+      )
     );
   };
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, emailError, passwordError } = this.state;
     return (
       <Login
         email={email}
@@ -35,6 +48,8 @@ class LoginContainer extends Component {
         onSubmit={this.handleSubmit}
         onEmailChange={this.onEmailChange}
         onPasswordChange={this.onPasswordChange}
+        emailError={emailError}
+        passwordError={passwordError}
       />
     );
   }

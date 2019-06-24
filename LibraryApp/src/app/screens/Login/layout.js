@@ -18,7 +18,7 @@ import {
 
 class Login extends Component {
   render() {
-    const { onSubmit, onPasswordChange, onEmailChange } = this.props;
+    const { onSubmit, onPasswordChange, onEmailChange, emailError, passwordError } = this.props;
     return (
       <ImageBackground source={backgroundImg} style={styles.container}>
         <Image source={logo} style={styles.logo} />
@@ -30,6 +30,7 @@ class Login extends Component {
           inputTextStyles={styles.inputTextStyle}
           onChange={onEmailChange}
         />
+        {emailError && <Text style={styles.errorText}>{emailError}</Text>}
         <CustomTextInput
           title={PASSWORD}
           placeholder={PASSWORD_PLACEHOLDER}
@@ -38,6 +39,7 @@ class Login extends Component {
           inputTextStyles={styles.inputTextStyle}
           onChange={onPasswordChange}
         />
+        {passwordError && <Text style={styles.errorText}>{passwordError}</Text>}
         <CustomButton
           title={SUBMIT_TEXT}
           buttonStyles={styles.buttonStyle}
@@ -51,7 +53,11 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  onSubmit: PropTypes.func
+  onSubmit: PropTypes.func.isRequired,
+  onPasswordChange: PropTypes.func.isRequired,
+  onEmailChange: PropTypes.func.isRequired,
+  emailError: PropTypes.string,
+  passwordError: PropTypes.string
 };
 
 export default Login;
