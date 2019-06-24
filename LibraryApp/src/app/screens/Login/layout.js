@@ -38,6 +38,7 @@ class Login extends Component {
           titleStyles={styles.titleStyle}
           inputTextStyles={styles.inputTextStyle}
           onChange={onPasswordChange}
+          secureTextEntry
         />
         {passwordError && <Text style={styles.errorText}>{passwordError}</Text>}
         <CustomButton
