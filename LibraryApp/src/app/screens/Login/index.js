@@ -1,48 +1,49 @@
 import React, { Component } from 'react';
-import { ImageBackground, Image, Text } from 'react-native';
-import CustomButton from '@components/CustomButton';
-import CustomTextInput from '@components/CustomTextInput';
-import backgroundImg from '@assets/bc_inicio.png';
-import logo from '@assets/Group.png';
+import { NavigationActions } from 'react-navigation';
+import PropTypes from 'prop-types';
+import Routes from '@constants/routes';
 
-import styles from './styles';
-import {
-  EMAIL,
-  EMAIL_PLACEHOLDER,
-  PASSWORD,
-  PASSWORD_PLACEHOLDER,
-  SUBMIT_TEXT,
-  FOOTER_TEXT
-} from './constants';
+import Login from './layout';
 
-class Login extends Component {
+class LoginContainer extends Component {
+  state = {
+    email: '',
+    password: ''
+  };
+
+  onEmailChange = email => this.setState({ email });
+
+  onPasswordChange = password => this.setState({ password });
+
+  handleSubmit = () => {
+    const { dispatch } = this.props.navigation;
+    // TENGO EL CONTENIDO DE LOS INPUTS VIEJAAA
+    console.log({ ...this.state });
+    return dispatch(
+      NavigationActions.navigate({
+        routeName: Routes.Library
+      })
+    );
+  };
+
   render() {
+    const { email, password } = this.state;
     return (
-      <ImageBackground source={backgroundImg} style={styles.container}>
-        <Image source={logo} style={styles.logo} />
-        <CustomTextInput
-          title={EMAIL}
-          placeholder={EMAIL_PLACEHOLDER}
-          viewStyles={styles.inputStyle}
-          titleStyles={styles.titleStyle}
-          inputTextStyles={styles.inputTextStyle}
-        />
-        <CustomTextInput
-          title={PASSWORD}
-          placeholder={PASSWORD_PLACEHOLDER}
-          viewStyles={styles.inputStyle}
-          titleStyles={styles.titleStyle}
-          inputTextStyles={styles.inputTextStyle}
-        />
-        <CustomButton
-          title={SUBMIT_TEXT}
-          buttonStyles={styles.buttonStyle}
-          textStyles={styles.buttonTextStyle}
-        />
-        <Text style={styles.footerText}>{FOOTER_TEXT}</Text>
-      </ImageBackground>
+      <Login
+        email={email}
+        password={password}
+        onSubmit={this.handleSubmit}
+        onEmailChange={this.onEmailChange}
+        onPasswordChange={this.onPasswordChange}
+      />
     );
   }
 }
 
-export default Login;
+LoginContainer.propTypes = {
+  navigation: PropTypes.shape({
+    dispatch: PropTypes.func
+  })
+};
+
+export default LoginContainer;

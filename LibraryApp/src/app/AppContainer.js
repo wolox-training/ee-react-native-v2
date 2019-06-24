@@ -43,8 +43,7 @@ const BooksNavigator = createStackNavigator(
 const TabNavigator = createBottomTabNavigator(
   {
     [Routes.Library]: BooksNavigator,
-    [Routes.EmptyScreen]: EmptyScreen,
-    [Routes.Login]: Login
+    [Routes.EmptyScreen]: EmptyScreen
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -73,4 +72,16 @@ const TabNavigator = createBottomTabNavigator(
   }
 );
 
-export default createAppContainer(TabNavigator);
+const RootNavigator = createStackNavigator(
+  {
+    [Routes.Login]: { screen: Login },
+    [Routes.BookList]: { screen: TabNavigator }
+  },
+  {
+    defaultNavigationOptions: {
+      header: null
+    }
+  }
+);
+
+export default createAppContainer(RootNavigator);

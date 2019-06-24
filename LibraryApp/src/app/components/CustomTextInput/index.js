@@ -11,8 +11,8 @@ class CustomTextInput extends Component {
 
   onChange = value => {
     const { onChange } = this.props;
-    if (onChange) onChange(value);
     this.setState({ value });
+    if (onChange) onChange(value);
   };
 
   render() {
