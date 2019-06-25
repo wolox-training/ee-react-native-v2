@@ -1,7 +1,10 @@
 import { create } from 'apisauce';
+import Config from 'react-native-config';
+
+const baseURL = Config.API_BASE_URL;
 
 const api = create({
-  baseURL: process.env.API_BASE_URL,
+  baseURL,
   timeout: 5000
 });
 

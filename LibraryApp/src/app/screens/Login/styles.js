@@ -51,5 +51,9 @@ export default StyleSheet.create({
   errorText: {
     color: red,
     top: ERROR_TOP
+  },
+  errorTextGeneral: {
+    alignSelf: 'center',
+    color: red
   }
 });

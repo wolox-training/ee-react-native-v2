@@ -5,7 +5,7 @@ import { actions } from './actions';
 const initialState = {
   loading: false,
   logged: false,
-  authError: ''
+  authError: null
 };
 
 const reducer = (state = immutable(initialState), action) => {
@@ -13,7 +13,7 @@ const reducer = (state = immutable(initialState), action) => {
     case actions.LOGIN_REQUEST:
       return immutable(state).merge({
         loading: true,
-        authError: ''
+        authError: null
       });
     case actions.LOGIN_SUCCESS:
       return immutable(state).merge({

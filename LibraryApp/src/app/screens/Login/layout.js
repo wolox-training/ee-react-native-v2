@@ -18,7 +18,7 @@ import {
 
 class Login extends Component {
   render() {
-    const { onSubmit, onPasswordChange, onEmailChange, emailError, passwordError } = this.props;
+    const { onSubmit, onPasswordChange, onEmailChange, emailError, passwordError, authError } = this.props;
     return (
       <ImageBackground source={backgroundImg} style={styles.container}>
         <Image source={logo} style={styles.logo} />
@@ -47,6 +47,7 @@ class Login extends Component {
           textStyles={styles.buttonTextStyle}
           onPress={onSubmit}
         />
+        {!!authError && <Text style={styles.errorTextGeneral}>{authError}</Text>}
         <Text style={styles.footerText}>{FOOTER_TEXT}</Text>
       </ImageBackground>
     );
@@ -58,7 +59,8 @@ Login.propTypes = {
   onPasswordChange: PropTypes.func.isRequired,
   onEmailChange: PropTypes.func.isRequired,
   emailError: PropTypes.string,
-  passwordError: PropTypes.string
+  passwordError: PropTypes.string,
+  authError: PropTypes.string
 };
 
 export default Login;

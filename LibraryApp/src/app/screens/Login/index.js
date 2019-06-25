@@ -24,7 +24,7 @@ class LoginContainer extends Component {
     const { login } = this.props;
     const { email, password } = this.state;
     const isValidEmail = isEmailValid(email);
-    const isValidPassword = true;
+    const isValidPassword = isPasswordValid(password);
     this.setState({
       emailError: isValidEmail ? null : EMAIL_ERROR,
       passwordError: isValidPassword ? null : PASSWORD_ERROR
@@ -34,6 +34,7 @@ class LoginContainer extends Component {
 
   render() {
     const { email, password, emailError, passwordError } = this.state;
+    const { authError } = this.props;
     return (
       <Login
         email={email}
@@ -43,6 +44,7 @@ class LoginContainer extends Component {
         onPasswordChange={this.onPasswordChange}
         emailError={emailError}
         passwordError={passwordError}
+        authError={authError}
       />
     );
   }
@@ -52,7 +54,8 @@ LoginContainer.propTypes = {
   navigation: PropTypes.shape({
     dispatch: PropTypes.func
   }),
-  login: PropTypes.func
+  login: PropTypes.func,
+  authError: PropTypes.string
 };
 
 const mapStateToProps = store => ({
@@ -60,7 +63,8 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: (email, password) => dispatch(loginActions.login(email, password))
+  login: (email, password, navigatorDispatch) =>
+    dispatch(loginActions.login(email, password, navigatorDispatch))
 });
 
 export default connect(

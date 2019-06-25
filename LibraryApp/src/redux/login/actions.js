@@ -31,10 +31,10 @@ const actionCreators = {
   login: (email, password, navigatorDispatch) => async dispatch => {
     dispatch({ type: actions.LOGIN });
     const response = await loginService(email, password);
-    if (response.ok) {
+    if (response.data.data) {
       dispatch(privateActionCreators.loginSuccess(navigatorDispatch));
     } else {
-      dispatch(privateActionCreators.loginFailure(response.problem));
+      dispatch(privateActionCreators.loginFailure(response.data.errors[0]));
     }
   }
 };
