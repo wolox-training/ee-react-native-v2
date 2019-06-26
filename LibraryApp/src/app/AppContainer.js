@@ -1,11 +1,12 @@
 import React from 'react';
+import { Image } from 'react-native';
 import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import Routes from '@constants/routes';
 import { blackSqueeze, pictonBlue } from '@constants/colors';
 import BookList from '@screens/BookList';
 import BookDetails from '@screens/BookDetails';
 import EmptyScreen from '@screens/EmptyScreen';
-import { Image } from 'react-native';
+import Login from '@screens/Login';
 
 import headerImg from './assets/bc_nav_bar.png';
 import backImg from './assets/ic_back.png';
@@ -37,7 +38,8 @@ const BooksNavigator = createStackNavigator(
 
 const tabNavigatorScreens = {
   [Routes.Library]: BooksNavigator,
-  [Routes.EmptyScreen]: EmptyScreen
+  [Routes.EmptyScreen]: EmptyScreen,
+  [Routes.Login]: Login
 };
 
 const defaultTabNavigationOptions = {
