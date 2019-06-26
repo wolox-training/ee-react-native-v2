@@ -6,10 +6,13 @@ import styles from './styles';
 
 class CustomButton extends Component {
   render() {
-    const { title, whiteTheme, buttonStyles, textStyles } = this.props;
+    const { title, whiteTheme, buttonStyles, textStyles, onPress } = this.props;
     const titleToUpper = title.toUpperCase();
     return (
-      <TouchableOpacity style={[styles.button, whiteTheme && styles.whiteThemeButton, buttonStyles]}>
+      <TouchableOpacity
+        style={[styles.button, whiteTheme && styles.whiteThemeButton, buttonStyles]}
+        onPress={onPress}
+      >
         <Text style={[styles.text, whiteTheme && styles.whiteThemeText, textStyles]}>{titleToUpper}</Text>
       </TouchableOpacity>
     );
@@ -20,7 +23,8 @@ CustomButton.propTypes = {
   buttonStyles: ViewPropTypes.style,
   textStyles: Text.propTypes.style,
   title: PropTypes.string.isRequired,
-  whiteTheme: PropTypes.bool
+  whiteTheme: PropTypes.bool,
+  onPress: PropTypes.func
 };
 
 CustomButton.defaultProps = {

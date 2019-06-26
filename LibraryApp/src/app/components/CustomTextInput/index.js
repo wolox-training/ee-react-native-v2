@@ -11,12 +11,20 @@ class CustomTextInput extends Component {
 
   onChange = value => {
     const { onChange } = this.props;
-    if (onChange) onChange(value);
     this.setState({ value });
+    if (onChange) onChange(value);
   };
 
   render() {
-    const { title, titleStyles, viewStyles, inputTextStyles, inputContainerStyles, placeholder } = this.props;
+    const {
+      title,
+      titleStyles,
+      viewStyles,
+      inputTextStyles,
+      inputContainerStyles,
+      placeholder,
+      secureTextEntry
+    } = this.props;
     const { value } = this.state;
     return (
       <View style={[styles.container, viewStyles]}>
@@ -27,6 +35,7 @@ class CustomTextInput extends Component {
             style={[styles.input, inputTextStyles]}
             placeholder={placeholder}
             onChangeText={this.onChange}
+            secureTextEntry={secureTextEntry}
           />
         </View>
       </View>
@@ -42,12 +51,14 @@ CustomTextInput.propTypes = {
   inputTextStyles: Text.propTypes.style,
   inputContainerStyles: ViewPropTypes.style,
   placeholder: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  secureTextEntry: PropTypes.bool
 };
 
 CustomTextInput.defaultProps = {
   value: '',
-  placeholder: ''
+  placeholder: '',
+  secureTextEntry: false
 };
 
 export default CustomTextInput;
