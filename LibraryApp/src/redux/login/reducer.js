@@ -11,17 +11,17 @@ const initialState = {
 const reducer = (state = immutable(initialState), action) => {
   switch (action.type) {
     case actions.LOGIN_REQUEST:
-      return immutable(state).merge({
+      return state.merge({
         loading: true,
         authError: null
       });
     case actions.LOGIN_SUCCESS:
-      return immutable(state).merge({
+      return state.merge({
         logged: true,
         loading: false
       });
     case actions.LOGIN_FAILURE:
-      return immutable(state).merge({
+      return state.merge({
         logged: false,
         loading: false,
         authError: action.payload
