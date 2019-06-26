@@ -31,7 +31,7 @@ const actionCreators = {
   login: (email, password) => async dispatch => {
     dispatch({ type: actions.LOGIN });
     const response = await loginService(email, password);
-    if (response.data.data) {
+    if (response?.data?.data) {
       dispatch(privateActionCreators.loginSuccess());
     } else {
       dispatch(privateActionCreators.loginFailure(response.data.errors[0]));
