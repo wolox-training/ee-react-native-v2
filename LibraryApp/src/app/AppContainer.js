@@ -7,6 +7,7 @@ import BookList from '@screens/BookList';
 import BookDetails from '@screens/BookDetails';
 import EmptyScreen from '@screens/EmptyScreen';
 import Login from '@screens/Login';
+import CustomButton from '@components/CustomButton';
 
 import headerImg from './assets/bc_nav_bar.png';
 import backImg from './assets/ic_back.png';
@@ -15,6 +16,8 @@ import libraryImgActive from './assets/ic_library_active.png';
 import settingsImg from './assets/ic_settings.png';
 import settingsImgActive from './assets/ic_settings_active.png';
 import styles from './styles';
+
+const LOGOUT_TEXT = 'LOGOUT';
 
 const BooksNavigator = createStackNavigator(
   {
@@ -28,7 +31,8 @@ const BooksNavigator = createStackNavigator(
       headerTitleStyle: styles.headerTitleStyles,
       headerBackTitle: null,
       headerTransparent: true,
-      headerBackImage: <Image source={backImg} style={styles.headerBackImgStyles} />
+      headerBackImage: <Image source={backImg} style={styles.headerBackImgStyles} />,
+      headerRight: <CustomButton title={LOGOUT_TEXT} buttonStyles={styles.logoutButtonStyle} />
     },
     cardStyle: {
       backgroundColor: blackSqueeze
@@ -36,6 +40,7 @@ const BooksNavigator = createStackNavigator(
   }
 );
 
+<<<<<<< HEAD
 const tabNavigatorScreens = {
   [Routes.Library]: BooksNavigator,
   [Routes.EmptyScreen]: EmptyScreen,
@@ -57,6 +62,30 @@ const defaultTabNavigationOptions = {
         default:
           tabIcon = null;
           break;
+=======
+const TabNavigator = createBottomTabNavigator(
+  {
+    [Routes.Library]: BooksNavigator,
+    [Routes.EmptyScreen]: EmptyScreen
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused }) => {
+        const { routeName } = navigation.state;
+        let tabIcon;
+        switch (routeName) {
+          case Routes.Library:
+            tabIcon = <Image source={focused ? libraryImgActive : libraryImg} style={styles.tabIcon} />;
+            break;
+          case Routes.EmptyScreen:
+            tabIcon = <Image source={focused ? settingsImgActive : settingsImg} style={styles.tabIcon} />;
+            break;
+          default:
+            tabIcon = null;
+            break;
+        }
+        return tabIcon;
+>>>>>>> dbed6d548c6c2e2c0ce33aa267182ad99957d539
       }
       return tabIcon;
     }
@@ -70,4 +99,16 @@ const defaultTabNavigationOptions = {
 
 const TabNavigator = createBottomTabNavigator(tabNavigatorScreens, defaultTabNavigationOptions);
 
-export default createAppContainer(TabNavigator);
+const RootNavigator = createStackNavigator(
+  {
+    [Routes.Login]: { screen: Login },
+    [Routes.BookList]: { screen: TabNavigator }
+  },
+  {
+    defaultNavigationOptions: {
+      header: null
+    }
+  }
+);
+
+export default createAppContainer(RootNavigator);

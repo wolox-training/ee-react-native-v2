@@ -1,48 +1,64 @@
 import React, { Component } from 'react';
-import { ImageBackground, Image, Text } from 'react-native';
-import CustomButton from '@components/CustomButton';
-import CustomTextInput from '@components/CustomTextInput';
-import backgroundImg from '@assets/bc_inicio.png';
-import logo from '@assets/Group.png';
+import { NavigationActions } from 'react-navigation';
+import PropTypes from 'prop-types';
+import Routes from '@constants/routes';
+import { isPasswordValid, isEmailValid } from '@utils/validations';
 
-import styles from './styles';
-import {
-  EMAIL,
-  EMAIL_PLACEHOLDER,
-  PASSWORD,
-  PASSWORD_PLACEHOLDER,
-  SUBMIT_TEXT,
-  FOOTER_TEXT
-} from './constants';
+import Login from './layout';
+import { EMAIL_ERROR, PASSWORD_ERROR } from './constants';
 
-class Login extends Component {
-  render() {
+class LoginContainer extends Component {
+  state = {
+    email: '',
+    password: '',
+    emailError: null,
+    passwordError: null
+  };
+
+  onEmailChange = email => this.setState({ email });
+
+  onPasswordChange = password => this.setState({ password });
+
+  handleSubmit = () => {
+    const { dispatch } = this.props.navigation;
+    const { email, password } = this.state;
+    const isValidEmail = isEmailValid(email);
+    const isValidPassword = isPasswordValid(password);
+    this.setState({
+      emailError: isValidEmail ? null : EMAIL_ERROR,
+      passwordError: isValidPassword ? null : PASSWORD_ERROR
+    });
     return (
-      <ImageBackground source={backgroundImg} style={styles.container}>
-        <Image source={logo} style={styles.logo} />
-        <CustomTextInput
-          title={EMAIL}
-          placeholder={EMAIL_PLACEHOLDER}
-          viewStyles={styles.inputStyle}
-          titleStyles={styles.titleStyle}
-          inputTextStyles={styles.inputTextStyle}
-        />
-        <CustomTextInput
-          title={PASSWORD}
-          placeholder={PASSWORD_PLACEHOLDER}
-          viewStyles={styles.inputStyle}
-          titleStyles={styles.titleStyle}
-          inputTextStyles={styles.inputTextStyle}
-        />
-        <CustomButton
-          title={SUBMIT_TEXT}
-          buttonStyles={styles.buttonStyle}
-          textStyles={styles.buttonTextStyle}
-        />
-        <Text style={styles.footerText}>{FOOTER_TEXT}</Text>
-      </ImageBackground>
+      isValidEmail &&
+      isValidPassword &&
+      dispatch(
+        NavigationActions.navigate({
+          routeName: Routes.Library
+        })
+      )
+    );
+  };
+
+  render() {
+    const { email, password, emailError, passwordError } = this.state;
+    return (
+      <Login
+        email={email}
+        password={password}
+        onSubmit={this.handleSubmit}
+        onEmailChange={this.onEmailChange}
+        onPasswordChange={this.onPasswordChange}
+        emailError={emailError}
+        passwordError={passwordError}
+      />
     );
   }
 }
 
-export default Login;
+LoginContainer.propTypes = {
+  navigation: PropTypes.shape({
+    dispatch: PropTypes.func
+  })
+};
+
+export default LoginContainer;

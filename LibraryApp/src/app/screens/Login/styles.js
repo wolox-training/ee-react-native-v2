@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { transparent, white } from '@constants/colors';
+import { transparent, white, red } from '@constants/colors';
 import { FONT_SIZE_LARGE } from '@constants/dimensions';
 import { isIOS } from '@constants/platform';
 
@@ -12,6 +12,7 @@ const INPUT_TEXT_BOT = isIOS ? 10 : -4;
 const LOGO_HEIGHT = 120;
 const LOGO_WIDTH = 160;
 const FOOTER_BOTTOM = 10;
+const ERROR_TOP = isIOS ? -20 : -10;
 
 export default StyleSheet.create({
   container: {
@@ -46,5 +47,9 @@ export default StyleSheet.create({
     alignSelf: 'center',
     bottom: FOOTER_BOTTOM,
     position: 'absolute'
+  },
+  errorText: {
+    color: red,
+    top: ERROR_TOP
   }
 });
