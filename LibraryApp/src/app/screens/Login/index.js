@@ -20,7 +20,6 @@ class LoginContainer extends Component {
   onPasswordChange = password => this.setState({ password });
 
   handleSubmit = () => {
-    const { dispatch: navigatorDispatch } = this.props.navigation;
     const { login } = this.props;
     const { email, password } = this.state;
     const isValidEmail = isEmailValid(email);
@@ -29,7 +28,7 @@ class LoginContainer extends Component {
       emailError: isValidEmail ? null : EMAIL_ERROR,
       passwordError: isValidPassword ? null : PASSWORD_ERROR
     });
-    return isValidEmail && isValidPassword && login(email, password, navigatorDispatch);
+    return isValidEmail && isValidPassword && login(email, password);
   };
 
   render() {
@@ -63,8 +62,7 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: (email, password, navigatorDispatch) =>
-    dispatch(loginActions.login(email, password, navigatorDispatch))
+  login: (email, password) => dispatch(loginActions.login(email, password))
 });
 
 export default connect(

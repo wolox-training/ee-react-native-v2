@@ -1,6 +1,8 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createReduxContainer } from 'react-navigation-redux-helpers';
+import { connect } from 'react-redux';
 import Routes from '@constants/routes';
 import { blackSqueeze, pictonBlue } from '@constants/colors';
 import BookList from '@screens/BookList';
@@ -72,7 +74,7 @@ const TabNavigator = createBottomTabNavigator(
   }
 );
 
-const RootNavigator = createStackNavigator(
+export const RootNavigator = createStackNavigator(
   {
     [Routes.Login]: { screen: Login },
     [Routes.BookList]: { screen: TabNavigator }
@@ -84,4 +86,13 @@ const RootNavigator = createStackNavigator(
   }
 );
 
-export default createAppContainer(RootNavigator);
+const App = createReduxContainer(RootNavigator);
+
+const mapStateToProps = store => ({
+  state: store.nav
+});
+const AppWithNavigationState = connect(mapStateToProps)(App);
+
+export default AppWithNavigationState;
+
+// export default createAppContainer(RootNavigator);

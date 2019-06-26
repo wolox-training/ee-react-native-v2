@@ -9,11 +9,11 @@ export const actions = {
 };
 
 const privateActionCreators = {
-  loginSuccess: navigatorDispatch => dispatch => {
+  loginSuccess: () => dispatch => {
     dispatch({
       type: actions.LOGIN_SUCCESS
     });
-    navigatorDispatch(
+    dispatch(
       NavigationActions.navigate({
         routeName: Routes.Library
       })
@@ -28,11 +28,11 @@ const privateActionCreators = {
 };
 
 const actionCreators = {
-  login: (email, password, navigatorDispatch) => async dispatch => {
+  login: (email, password) => async dispatch => {
     dispatch({ type: actions.LOGIN });
     const response = await loginService(email, password);
     if (response.data.data) {
-      dispatch(privateActionCreators.loginSuccess(navigatorDispatch));
+      dispatch(privateActionCreators.loginSuccess());
     } else {
       dispatch(privateActionCreators.loginFailure(response.data.errors[0]));
     }
