@@ -94,5 +94,3 @@ const mapStateToProps = store => ({
 const AppWithNavigationState = connect(mapStateToProps)(App);
 
 export default AppWithNavigationState;
-
-// export default createAppContainer(RootNavigator);
