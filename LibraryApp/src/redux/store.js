@@ -19,12 +19,21 @@ const reducers = {
 const reducer = combineReducers(reducers);
 
 const middlewares = [];
+const enhancers = [];
 
-middlewares.push(thunk);
 middlewares.push(createReactNavigationReduxMiddleware(store => store.nav));
+middlewares.push(thunk);
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line no-underscore-dangle
-export default createStore(
+enhancers.push(applyMiddleware(...middlewares));
+
+const store = createStore(
   reducer,
-  composeEnhancers(applyMiddleware(...middlewares), Reactotron.createEnhancer())
+  __DEV__
+    ? compose(
+        ...enhancers,
+        Reactotron.createEnhancer()
+      )
+    : compose(...enhancers)
 );
+
+export default store;
