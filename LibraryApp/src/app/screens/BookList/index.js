@@ -4,7 +4,7 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Routes from '@constants/routes';
-import withLoadingHOC from '@components/LoadingHOC';
+import withLoading from '@components/LoadingHOC';
 
 import { books } from './books';
 import styles from './styles';
@@ -51,6 +51,6 @@ const mapStateToProps = store => ({
   loading: store.login.loading
 });
 
-const BookDetailsWithLoading = withLoadingHOC(BookList);
+const BookDetailsWithLoading = withLoading(BookList);
 
 export default connect(mapStateToProps)(BookDetailsWithLoading);

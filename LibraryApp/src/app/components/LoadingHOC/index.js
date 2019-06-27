@@ -5,7 +5,7 @@ import { ActivityIndicator } from 'react-native';
 
 import styles from './styles';
 
-const LoadingHOC = Component => ({ loading, ...rest }) =>
-  loading ? <ActivityIndicator style={styles.container} /> : <Component {...rest} />;
+const LoadingHOC = Component => ({ loading, ...props }) =>
+  loading ? <ActivityIndicator style={styles.container} /> : <Component {...props} />;
 
 export default LoadingHOC;
