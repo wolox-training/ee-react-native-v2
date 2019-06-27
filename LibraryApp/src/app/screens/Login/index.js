@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
-import Routes from '@constants/routes';
+import { connect } from 'react-redux';
 import { isPasswordValid, isEmailValid } from '@utils/validations';
+import loginActions from '@redux/login/actions';
 
 import Login from './layout';
 import { EMAIL_ERROR, PASSWORD_ERROR } from './constants';
@@ -20,7 +20,7 @@ class LoginContainer extends Component {
   onPasswordChange = password => this.setState({ password });
 
   handleSubmit = () => {
-    const { dispatch } = this.props.navigation;
+    const { login } = this.props;
     const { email, password } = this.state;
     const isValidEmail = isEmailValid(email);
     const isValidPassword = isPasswordValid(password);
@@ -28,19 +28,12 @@ class LoginContainer extends Component {
       emailError: isValidEmail ? null : EMAIL_ERROR,
       passwordError: isValidPassword ? null : PASSWORD_ERROR
     });
-    return (
-      isValidEmail &&
-      isValidPassword &&
-      dispatch(
-        NavigationActions.navigate({
-          routeName: Routes.Library
-        })
-      )
-    );
+    return isValidEmail && isValidPassword && login(email, password);
   };
 
   render() {
     const { email, password, emailError, passwordError } = this.state;
+    const { authError } = this.props;
     return (
       <Login
         email={email}
@@ -50,6 +43,7 @@ class LoginContainer extends Component {
         onPasswordChange={this.onPasswordChange}
         emailError={emailError}
         passwordError={passwordError}
+        authError={authError}
       />
     );
   }
@@ -58,7 +52,20 @@ class LoginContainer extends Component {
 LoginContainer.propTypes = {
   navigation: PropTypes.shape({
     dispatch: PropTypes.func
-  })
+  }),
+  login: PropTypes.func,
+  authError: PropTypes.string
 };
 
-export default LoginContainer;
+const mapStateToProps = store => ({
+  authError: store.login.authError
+});
+
+const mapDispatchToProps = dispatch => ({
+  login: (email, password) => dispatch(loginActions.login(email, password))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginContainer);

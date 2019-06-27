@@ -33,6 +33,7 @@ jsconfig.json
 .vscode/
 package-lock.json
 *.iml
+.env
 
 # node.js
 #
