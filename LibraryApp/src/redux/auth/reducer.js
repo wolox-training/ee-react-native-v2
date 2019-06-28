@@ -31,6 +31,8 @@ const reducer = (state = immutable(initialState), action) => {
         loading: false,
         authError: action.payload
       });
+    case actions.LOGOUT:
+      return initialState;
     default:
       return state;
   }

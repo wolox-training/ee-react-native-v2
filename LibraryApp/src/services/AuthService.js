@@ -9,6 +9,7 @@ export const setCurrentUser = async (token, client, uid) => {
   const clientNumber = ['@Auth:client', JSON.stringify(client)];
   return AsyncStorage.multiSet([accessToken, clientNumber, userId]);
 };
+
 export const getCurrentUserToken = async () => AsyncStorage.getItem('@Auth:accessToken').then(JSON.parse);
 
 export const initialAuth = async dispatch => {
@@ -17,3 +18,5 @@ export const initialAuth = async dispatch => {
 };
 
 export const login = (email, password) => api.post('api/v1/auth/sign_in', { email, password });
+
+export const logout = () => AsyncStorage.multiRemove(['@Auth:accessToken', '@Auth:userId', '@Auth:client']);
