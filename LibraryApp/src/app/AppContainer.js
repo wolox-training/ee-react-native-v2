@@ -42,11 +42,9 @@ const BooksNavigator = createStackNavigator(
   }
 );
 
-<<<<<<< HEAD
 const tabNavigatorScreens = {
   [Routes.Library]: BooksNavigator,
-  [Routes.EmptyScreen]: EmptyScreen,
-  [Routes.Login]: Login
+  [Routes.EmptyScreen]: EmptyScreen
 };
 
 const defaultTabNavigationOptions = {
@@ -64,30 +62,6 @@ const defaultTabNavigationOptions = {
         default:
           tabIcon = null;
           break;
-=======
-const TabNavigator = createBottomTabNavigator(
-  {
-    [Routes.Library]: BooksNavigator,
-    [Routes.EmptyScreen]: EmptyScreen
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused }) => {
-        const { routeName } = navigation.state;
-        let tabIcon;
-        switch (routeName) {
-          case Routes.Library:
-            tabIcon = <Image source={focused ? libraryImgActive : libraryImg} style={styles.tabIcon} />;
-            break;
-          case Routes.EmptyScreen:
-            tabIcon = <Image source={focused ? settingsImgActive : settingsImg} style={styles.tabIcon} />;
-            break;
-          default:
-            tabIcon = null;
-            break;
-        }
-        return tabIcon;
->>>>>>> dbed6d548c6c2e2c0ce33aa267182ad99957d539
       }
       return tabIcon;
     }

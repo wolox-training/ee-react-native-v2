@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Routes from '@constants/routes';
+import withLoading from '@components/LoadingHOC';
 
 import { books } from './books';
 import styles from './styles';
@@ -45,4 +47,10 @@ BookList.propTypes = {
   })
 };
 
-export default BookList;
+const mapStateToProps = store => ({
+  loading: store.login.loading
+});
+
+const BookDetailsWithLoading = withLoading(BookList);
+
+export default connect(mapStateToProps)(BookDetailsWithLoading);

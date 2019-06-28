@@ -4,4 +4,5 @@ import { reactotronRedux } from 'reactotron-redux';
 const reactotron = Reactotron.configure({ name: 'Library App' })
   .use(reactotronRedux())
   .connect();
+
 export default reactotron;
