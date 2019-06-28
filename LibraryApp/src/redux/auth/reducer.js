@@ -10,6 +10,11 @@ const initialState = {
 
 const reducer = (state = immutable(initialState), action) => {
   switch (action.type) {
+    case actions.INIT_STORED_USER:
+      return state.merge({
+        loading: false,
+        logged: true
+      });
     case actions.LOGIN_REQUEST:
       return state.merge({
         loading: true,

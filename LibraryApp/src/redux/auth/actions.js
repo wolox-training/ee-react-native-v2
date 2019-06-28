@@ -1,11 +1,12 @@
-import { login as loginService } from '@services/LoginService';
+import { login as loginService, setCurrentUser as setCurrentUserStorage } from '@services/AuthService';
 import { NavigationActions } from 'react-navigation';
 import Routes from '@constants/routes';
 
 export const actions = {
   LOGIN: 'LOGIN',
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-  LOGIN_FAILURE: 'LOGIN_FAILURE'
+  LOGIN_FAILURE: 'LOGIN_FAILURE',
+  INIT_STORED_USER: 'INIT_STORED_USER'
 };
 
 const privateActionCreators = {
@@ -24,14 +25,32 @@ const privateActionCreators = {
       type: actions.LOGIN_FAILURE,
       payload: problem
     });
+  },
+  initWithStoredUser: () => dispatch => {
+    dispatch({
+      type: actions.INIT_STORED_USER
+    });
+    dispatch(
+      NavigationActions.navigate({
+        routeName: Routes.Library
+      })
+    );
   }
 };
 
 const actionCreators = {
+  initRemembered: () => dispatch => {
+    dispatch(privateActionCreators.initWithStoredUser());
+  },
   login: (email, password) => async dispatch => {
     dispatch({ type: actions.LOGIN });
     const response = await loginService(email, password);
-    if (response?.data?.data) {
+    if (response.ok) {
+      const { headers } = response;
+      const token = headers['access-token'];
+      const { client, uid } = headers;
+      // debugger;
+      await setCurrentUserStorage(token, client, uid);
       dispatch(privateActionCreators.loginSuccess());
     } else {
       dispatch(privateActionCreators.loginFailure(response.data.errors[0]));

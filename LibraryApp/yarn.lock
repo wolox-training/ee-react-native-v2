@@ -801,6 +801,11 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^12.0.9"
 
+"@react-native-community/async-storage@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.5.0.tgz#647ffcd832272068b0be57332e08d73036ed391f"
+  integrity sha512-2yE4RzQ5IL+UTPhuMY0ykNRKHf1m90jOnmp8fcDPUun5U97cXlorjI4p66ovDgF0FuOv8ZpiUKvunGy3qqBxwg==
+
 "@react-native-community/cli@^1.2.1":
   version "1.9.8"
   resolved "https://registry.yarnpkg.com/@react-native-community/cli/-/cli-1.9.8.tgz#8488699f78b146cab2d7451951c4218671812cdc"
@@ -1061,6 +1066,14 @@ anymatch@^2.0.0:
   dependencies:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
+
+apisauce@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/apisauce/-/apisauce-0.16.0.tgz#5620624ffe56d755f66a7ab738138e5ff74f25f6"
+  integrity sha512-aDHJLhpBjIpv9hxZPsajkYqLtNZAkcWHBqeJZfVNrDE9pj0HZVv60HQUqs6vjGsb5p2WR26exdGA5SdoAWAH5A==
+  dependencies:
+    axios "^0.18.0"
+    ramda "^0.25.0"
 
 apisauce@^1.0.2:
   version "1.0.2"
@@ -5575,6 +5588,13 @@ react-navigation-drawer@~1.2.1:
   dependencies:
     react-native-tab-view "^1.2.0"
 
+react-navigation-redux-helpers@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/react-navigation-redux-helpers/-/react-navigation-redux-helpers-3.0.2.tgz#612e1d5b1378ba0c17b6a2d8ec9a01cc698a3a16"
+  integrity sha512-+z7/eBGBpws/W3ffu7ayEl1YFMAbXO3Sgul3KIDyESI1BbmfSvKD2aRMEfE7AlO+58fJJsqWUMhNw+VACAdHjw==
+  dependencies:
+    invariant "^2.2.2"
+
 react-navigation-stack@~1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/react-navigation-stack/-/react-navigation-stack-1.4.0.tgz#69cdb029ea4ee5877d7e933b3117dc90bc841eb2"
@@ -5649,6 +5669,13 @@ react@16.8.3:
     prop-types "^15.6.2"
     scheduler "^0.13.3"
 
+reactotron-apisauce@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/reactotron-apisauce/-/reactotron-apisauce-3.0.0.tgz#4a6269982d8fe0c58f831dcade0738fa198e05c2"
+  integrity sha512-FoENyjBBoinwQfirtCR/0+PnhF1qgY/MbnAjYqS/Oe4iTT1cETB34Xa6ux2312ir9cHorgdWEU5GahWfxw2GBg==
+  dependencies:
+    apisauce "^0.16.0"
+
 reactotron-core-client@2.8.3:
   version "2.8.3"
   resolved "https://registry.yarnpkg.com/reactotron-core-client/-/reactotron-core-client-2.8.3.tgz#e8ce782f21ba3c04eb3c678297edceac283857ff"
@@ -5663,6 +5690,11 @@ reactotron-react-native@^3.6.4:
     query-string "6.5.0"
     reactotron-core-client "2.8.3"
     rn-host-detect "1.1.5"
+
+reactotron-redux@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/reactotron-redux/-/reactotron-redux-3.1.1.tgz#eed516afa7f26d6202355e777fbc38ed12ae5f29"
+  integrity sha512-8tnF952oUy5bd1UmXchegumNuvO/v8o1KiU7uOsutN8ZZ2/RQ91Vew/bLF7JxzeJBWaiU2kxItMFeZucFm4slw==
 
 read-pkg-up@^2.0.0:
   version "2.0.0"

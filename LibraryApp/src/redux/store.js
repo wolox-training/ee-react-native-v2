@@ -4,7 +4,7 @@ import {
   createReactNavigationReduxMiddleware,
   createNavigationReducer
 } from 'react-navigation-redux-helpers';
-import loginReducer from '@redux/login/reducer';
+import authReducer from '@redux/auth/reducer';
 import { RootNavigator } from '@app/AppContainer';
 
 import Reactotron from '../../ReactotronConfig';
@@ -12,7 +12,7 @@ import Reactotron from '../../ReactotronConfig';
 const nav = createNavigationReducer(RootNavigator);
 
 const reducers = {
-  login: loginReducer,
+  auth: authReducer,
   nav
 };
 

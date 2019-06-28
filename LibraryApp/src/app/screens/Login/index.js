@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { isPasswordValid, isEmailValid } from '@utils/validations';
-import loginActions from '@redux/login/actions';
+import authActions from '@redux/auth/actions';
 
 import Login from './layout';
 import { EMAIL_ERROR, PASSWORD_ERROR } from './constants';
@@ -58,11 +58,11 @@ LoginContainer.propTypes = {
 };
 
 const mapStateToProps = store => ({
-  authError: store.login.authError
+  authError: store.auth.authError
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: (email, password) => dispatch(loginActions.login(email, password))
+  login: (email, password) => dispatch(authActions.login(email, password))
 });
 
 export default connect(
