@@ -32,7 +32,7 @@ const reducer = (state = immutable(initialState), action) => {
         authError: action.payload
       });
     case actions.LOGOUT:
-      return initialState;
+      return state.merge({ ...initialState });
     default:
       return state;
   }
