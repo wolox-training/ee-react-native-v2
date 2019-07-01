@@ -1,3 +1,5 @@
+import immutable from 'seamless-immutable';
+
 import { actions } from './actions';
 
 const initialState = {
@@ -6,18 +8,22 @@ const initialState = {
   booksError: null
 };
 
-export default function reducer(state = initialState, action) {
+export default function reducer(state = immutable(initialState), action) {
   const { type, payload } = action;
   switch (type) {
     case actions.GET_BOOKS:
-      return { ...state, booksLoading: true };
-
+      return state.merge({ booksLoading: true });
     case actions.GET_BOOKS_SUCCESS:
-      return { ...state, books: payload, booksLoading: false, booksError: null };
-
+      return state.merge({
+        books: payload,
+        booksLoading: false,
+        booksError: null
+      });
     case actions.GET_BOOKS_FAILURE:
-      return { ...state, booksLoading: false, booksError: payload };
-
+      return state.merge({
+        booksLoading: false,
+        booksError: payload
+      });
     default:
       return state;
   }

@@ -67,7 +67,7 @@ const actionCreators = {
       await AuthService.setCurrentUser({ token, client, uid });
       dispatch(privateActionCreators.loginSuccess());
     } else {
-      dispatch(privateActionCreators.loginFailure(response.data.errors[0]));
+      dispatch(privateActionCreators.loginFailure(response.problem));
     }
   },
   logout: () => dispatch => {
