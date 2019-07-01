@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Routes from '@constants/routes';
 import withLoading from '@components/LoadingHOC';
+import booksActions from '@redux/books/actions';
 
-import { books } from './books';
+// import { books } from './books';
 import styles from './styles';
 import Book from './components/Book';
 
@@ -14,6 +15,11 @@ const APP_TITLE = 'LIBRARY';
 
 class BookList extends Component {
   static navigationOptions = () => ({ title: APP_TITLE });
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(booksActions.getBooks());
+  }
 
   goToDetails = item => {
     const { navigation } = this.props;
@@ -30,6 +36,7 @@ class BookList extends Component {
   renderItem = ({ item }) => <Book item={item} handleOnPress={this.goToDetails} />;
 
   render() {
+    const { books } = this.props;
     return (
       <FlatList
         data={books}
@@ -44,11 +51,23 @@ class BookList extends Component {
 BookList.propTypes = {
   navigation: PropTypes.shape({
     dispatch: PropTypes.func
-  })
+  }),
+  books: PropTypes.arrayOf(
+    PropTypes.shape({
+      author: PropTypes.string,
+      coverImg: PropTypes.string,
+      editor: PropTypes.string,
+      genre: PropTypes.string,
+      id: PropTypes.number,
+      title: PropTypes.string,
+      year: PropTypes.string
+    }).isRequired
+  )
 };
 
 const mapStateToProps = store => ({
-  loading: store.auth.loading
+  loading: store.auth.loading,
+  books: store.books.books
 });
 
 const BookDetailsWithLoading = withLoading(BookList);

@@ -5,6 +5,7 @@ import {
   createNavigationReducer
 } from 'react-navigation-redux-helpers';
 import authReducer from '@redux/auth/reducer';
+import booksReducer from '@redux/books/reducer';
 import { RootNavigator } from '@app/AppContainer';
 
 import Reactotron from '../../ReactotronConfig';
@@ -13,6 +14,7 @@ const nav = createNavigationReducer(RootNavigator);
 
 const reducers = {
   auth: authReducer,
+  books: booksReducer,
   nav
 };
 

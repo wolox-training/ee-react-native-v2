@@ -3,7 +3,11 @@ import AsyncStorage from '@react-native-community/async-storage';
 import authActions from '@redux/auth/actions';
 
 export const setCurrentUser = async (token, client, uid) => {
-  api.setHeader('Access-Token', token);
+  api.setHeaders({
+    'Access-Token': token,
+    Client: client,
+    Uid: uid
+  });
   const accessToken = ['@Auth:accessToken', JSON.stringify(token)];
   const userId = ['@Auth:userId', JSON.stringify(uid)];
   const clientNumber = ['@Auth:client', JSON.stringify(client)];
