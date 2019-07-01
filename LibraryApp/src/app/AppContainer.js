@@ -19,6 +19,8 @@ import settingsImg from './assets/ic_settings.png';
 import settingsImgActive from './assets/ic_settings_active.png';
 import styles from './styles';
 
+const APP_TITLE = 'LIBRARY';
+
 const BooksNavigator = createStackNavigator(
   {
     [Routes.BookList]: { screen: BookList },
@@ -32,11 +34,13 @@ const BooksNavigator = createStackNavigator(
       headerBackTitle: null,
       headerTransparent: true,
       headerBackImage: <Image source={backImg} style={styles.headerBackImgStyles} />,
-      headerRight: <LogoutButton />
+      headerRight: <LogoutButton />,
+      headerTitle: APP_TITLE
     },
     cardStyle: {
       backgroundColor: blackSqueeze
-    }
+    },
+    headerLayoutPreset: 'center'
   }
 );
 
