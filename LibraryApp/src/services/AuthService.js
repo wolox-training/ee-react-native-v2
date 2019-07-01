@@ -1,26 +1,44 @@
 import api from '@config/api';
 import AsyncStorage from '@react-native-community/async-storage';
-import authActions from '@redux/auth/actions';
 
-export const setCurrentUser = async (token, client, uid) => {
+const LOGIN_ENDPOINT = 'api/v1/auth/sign_in';
+
+const TOKEN_STORAGE = '@Auth:accessToken';
+const CLIENT_STORAGE = '@Auth:client';
+const UID_STORAGE = '@Auth:userId';
+
+export const setCurrentUser = async ({ token, client, uid }) => {
   api.setHeaders({
     'Access-Token': token,
     Client: client,
     Uid: uid
   });
-  const accessToken = ['@Auth:accessToken', JSON.stringify(token)];
-  const userId = ['@Auth:userId', JSON.stringify(uid)];
-  const clientNumber = ['@Auth:client', JSON.stringify(client)];
+  const accessToken = [TOKEN_STORAGE, JSON.stringify(token)];
+  const userId = [UID_STORAGE, JSON.stringify(uid)];
+  const clientNumber = [CLIENT_STORAGE, JSON.stringify(client)];
+  // debugger;
   return AsyncStorage.multiSet([accessToken, clientNumber, userId]);
 };
 
-export const getCurrentUserToken = async () => AsyncStorage.getItem('@Auth:accessToken').then(JSON.parse);
-
-export const initialAuth = async dispatch => {
-  const token = await getCurrentUserToken();
-  if (token) dispatch(authActions.initRemembered());
+export const getCurrentUser = async () => {
+  const values = await AsyncStorage.multiGet([TOKEN_STORAGE, CLIENT_STORAGE, UID_STORAGE]);
+  const headers = {
+    token: JSON.parse(values[0][1]),
+    client: JSON.parse(values[1][1]),
+    uid: JSON.parse(values[2][1])
+  };
+  // debugger;
+  return {
+    headers,
+    authenticated: headers.token && headers.client && headers.uid
+  };
 };
 
-export const login = (email, password) => api.post('api/v1/auth/sign_in', { email, password });
+// export const initialAuth = async dispatch => {
+//   const token = await getCurrentUser();
+//   if (token) dispatch(authActions.initRemembered());
+// };
 
-export const logout = () => AsyncStorage.multiRemove(['@Auth:accessToken', '@Auth:userId', '@Auth:client']);
+export const login = (email, password) => api.post(LOGIN_ENDPOINT, { email, password });
+
+export const logout = () => AsyncStorage.multiRemove([TOKEN_STORAGE, UID_STORAGE, CLIENT_STORAGE]);
