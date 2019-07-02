@@ -3,7 +3,8 @@ const Routes = {
   BookList: 'BookList',
   Library: 'Library',
   Login: 'Login',
-  EmptyScreen: 'EmptyScreen'
+  EmptyScreen: 'EmptyScreen',
+  SearchScreen: 'SearchScreen'
 };
 
 export default Routes;

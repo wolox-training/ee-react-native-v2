@@ -7,8 +7,9 @@ import Routes from '@constants/routes';
 import { blackSqueeze, pictonBlue } from '@constants/colors';
 import BookList from '@screens/BookList';
 import BookDetails from '@screens/BookDetails';
-import EmptyScreen from '@screens/EmptyScreen';
+// import EmptyScreen from '@screens/EmptyScreen';
 import Login from '@screens/Login';
+import SearchScreen from '@screens/SearchScreen';
 import LogoutButton from '@components/LogoutButton';
 
 import headerImg from './assets/bc_nav_bar.png';
@@ -46,7 +47,7 @@ const BooksNavigator = createStackNavigator(
 
 const tabNavigatorScreens = {
   [Routes.Library]: BooksNavigator,
-  [Routes.EmptyScreen]: EmptyScreen
+  [Routes.SearchScreen]: SearchScreen
 };
 
 const defaultTabNavigationOptions = {
@@ -58,7 +59,7 @@ const defaultTabNavigationOptions = {
         case Routes.Library:
           tabIcon = <Image source={focused ? libraryImgActive : libraryImg} style={styles.tabIcon} />;
           break;
-        case Routes.EmptyScreen:
+        case Routes.SearchScreen:
           tabIcon = <Image source={focused ? settingsImgActive : settingsImg} style={styles.tabIcon} />;
           break;
         default:

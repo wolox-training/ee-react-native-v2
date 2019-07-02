@@ -6,10 +6,9 @@ import PropTypes from 'prop-types';
 import Routes from '@constants/routes';
 import withLoading from '@components/LoadingHOC';
 import booksActions from '@redux/books/actions';
+import Book from '@components/Book';
 
-// import { books } from './books';
 import styles from './styles';
-import Book from './components/Book';
 
 class BookList extends Component {
   componentDidMount() {
