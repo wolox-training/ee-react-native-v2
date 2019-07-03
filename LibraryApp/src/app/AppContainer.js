@@ -11,6 +11,7 @@ import EmptyScreen from '@screens/EmptyScreen';
 import Login from '@screens/Login';
 import SearchScreen from '@screens/SearchScreen';
 import LogoutButton from '@components/LogoutButton';
+import SearchButton from '@components/SearchButton';
 
 import headerImg from './assets/bc_nav_bar.png';
 import backImg from './assets/ic_back.png';
@@ -24,7 +25,12 @@ const APP_TITLE = 'LIBRARY';
 
 const BooksNavigator = createStackNavigator(
   {
-    [Routes.BookList]: { screen: BookList },
+    [Routes.BookList]: {
+      screen: BookList,
+      navigationOptions: {
+        headerLeft: <SearchButton />
+      }
+    },
     [Routes.BookDetails]: { screen: BookDetails },
     [Routes.SearchScreen]: { screen: SearchScreen }
   },
