@@ -4,7 +4,7 @@ import {
   createReactNavigationReduxMiddleware,
   createNavigationReducer
 } from 'react-navigation-redux-helpers';
-import loginReducer from '@redux/login/reducer';
+import authReducer from '@redux/auth/reducer';
 import { RootNavigator } from '@app/AppContainer';
 
 import Reactotron from '../../ReactotronConfig';
@@ -12,19 +12,28 @@ import Reactotron from '../../ReactotronConfig';
 const nav = createNavigationReducer(RootNavigator);
 
 const reducers = {
-  login: loginReducer,
+  auth: authReducer,
   nav
 };
 
 const reducer = combineReducers(reducers);
 
 const middlewares = [];
+const enhancers = [];
 
-middlewares.push(thunk);
 middlewares.push(createReactNavigationReduxMiddleware(store => store.nav));
+middlewares.push(thunk);
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line no-underscore-dangle
-export default createStore(
+enhancers.push(applyMiddleware(...middlewares));
+
+const store = createStore(
   reducer,
-  composeEnhancers(applyMiddleware(...middlewares), Reactotron.createEnhancer())
+  __DEV__
+    ? compose(
+        ...enhancers,
+        Reactotron.createEnhancer()
+      )
+    : compose(...enhancers)
 );
+
+export default store;

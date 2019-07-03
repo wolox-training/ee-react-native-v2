@@ -48,7 +48,7 @@ BookList.propTypes = {
 };
 
 const mapStateToProps = store => ({
-  loading: store.login.loading
+  loading: store.auth.loading
 });
 
 const BookDetailsWithLoading = withLoading(BookList);
