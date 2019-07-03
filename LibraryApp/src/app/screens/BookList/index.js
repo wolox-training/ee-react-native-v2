@@ -7,7 +7,6 @@ import Routes from '@constants/routes';
 import withLoading from '@components/LoadingHOC';
 import booksActions from '@redux/books/actions';
 
-// import { books } from './books';
 import styles from './styles';
 import Book from './components/Book';
 
