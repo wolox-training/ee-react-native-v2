@@ -8,9 +8,6 @@ class CustomButton extends Component {
   render() {
     const { title, icon, whiteTheme, buttonStyles, textStyles, iconStyles, onPress } = this.props;
     const titleToUpper = title && title.toUpperCase();
-    console.log(`Estoy en el button ${title || icon}`);
-    console.log(onPress);
-    debugger;
     return (
       <TouchableOpacity
         style={[styles.button, whiteTheme && styles.whiteThemeButton, buttonStyles]}
