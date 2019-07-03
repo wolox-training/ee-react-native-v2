@@ -38,34 +38,4 @@ Book.propTypes = {
   handleOnPress: PropTypes.func
 };
 
-/*
-  {
-      "id": 57794,
-      "author": "Rufus Bartoletti",
-      "title": "Dying of the Light",
-      "image": "http://bartolettihyatt.io/kasi",
-      "editor": "Flame Tree Publishing",
-      "year": "1962",
-      "genre": "Short story",
-      "created_at": "2019-03-19T14:59:38.835Z",
-      "updated_at": "2019-03-19T14:59:38.835Z",
-      "rents": []
-    }
-*/
-
-/*
-    Book.propTypes = {
-  item: PropTypes.shape({
-    author: PropTypes.string,
-    coverImg: PropTypes.string,
-    genre: PropTypes.string,
-    id: PropTypes.number,
-    publisher: PropTypes.string,
-    title: PropTypes.string,
-    year: PropTypes.string
-  }).isRequired,
-  handleOnPress: PropTypes.func
-};
-*/
-
 export default Book;

@@ -17,7 +17,6 @@ export const bookActions = {
     const response = await BookService.getBooks();
     if (response.ok) dispatch(privateBookActions.getBooksSuccess(response.data));
     else dispatch(privateBookActions.getBooksFailure(response.problem));
-    // debugger;
   }
 };
 
