@@ -33,3 +33,5 @@ export const getCurrentUser = async () => {
 };
 
 export const login = (email, password) => api.post(LOGIN_ENDPOINT, { email, password });
+
+export const logout = () => AsyncStorage.multiRemove([TOKEN_STORAGE, UID_STORAGE, CLIENT_STORAGE]);

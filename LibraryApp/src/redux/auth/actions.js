@@ -6,6 +6,7 @@ export const actions = {
   LOGIN: 'LOGIN',
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
   LOGIN_FAILURE: 'LOGIN_FAILURE',
+  LOGOUT: 'LOGOUT',
   AUTH_INIT: 'AUTH_INIT'
 };
 
@@ -60,6 +61,15 @@ const actionCreators = {
     } else {
       dispatch(privateActionCreators.loginFailure(response.data.errors[0]));
     }
+  },
+  logout: () => dispatch => {
+    dispatch({ type: actions.LOGOUT });
+    dispatch(
+      NavigationActions.navigate({
+        routeName: Routes.Login
+      })
+    );
+    AuthService.logout();
   }
 };
 
