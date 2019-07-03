@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, ViewPropTypes } from 'react-native';
+import { View, Image, ViewPropTypes, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import CustomTextInput from '@components/CustomTextInput';
 
@@ -9,7 +9,7 @@ import closeIcon from './assets/xButtonGray.png';
 
 class SearchBar extends Component {
   render() {
-    const { containerStyles, onSearch } = this.props;
+    const { containerStyles, onSearch, onClose, searchNotEmpty } = this.props;
     return (
       <View style={[styles.container, containerStyles]}>
         <Image source={searchIcon} style={styles.searchIcon} />
@@ -20,9 +20,12 @@ class SearchBar extends Component {
             onChange={onSearch}
           />
         </View>
-        <View style={styles.closeIconContainer}>
+        <TouchableOpacity
+          style={[styles.closeIconContainer, searchNotEmpty && styles.closeIconRed]}
+          onPress={onClose}
+        >
           <Image source={closeIcon} style={styles.closeIcon} />
-        </View>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -30,7 +33,13 @@ class SearchBar extends Component {
 
 SearchBar.propTypes = {
   containerStyles: ViewPropTypes.style,
-  onSearch: PropTypes.func
+  onSearch: PropTypes.func,
+  onClose: PropTypes.func,
+  searchNotEmpty: PropTypes.bool
+};
+
+SearchBar.defaultProps = {
+  searchNotEmpty: false
 };
 
 export default SearchBar;

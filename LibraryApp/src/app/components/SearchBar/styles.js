@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
-import { white, gray, lightGray } from '@constants/colors';
+import { white, gray, lightGray, monzaRed } from '@constants/colors';
+import { FONT_SIZE_XLARGE } from '@constants/dimensions';
 
 const BAR_BORDER_RADIUS = 20;
 const BAR_HEIGHT = 35;
 const BAR_PADDING_HORIZONTAL = 10;
 const INPUT_MARGIN_HORIZONTAL = 15;
-const INPUT_FONT_SIZE = 20;
 const SEARCH_ICON_SIZE = 20;
 const CLOSE_ICON_SIZE = 10;
 const CLOSE_ICON_CONTAINER_SIZE = 20;
@@ -27,7 +27,7 @@ export default StyleSheet.create({
     marginHorizontal: INPUT_MARGIN_HORIZONTAL
   },
   inputTextStyle: {
-    fontSize: INPUT_FONT_SIZE,
+    fontSize: FONT_SIZE_XLARGE,
     fontWeight: 'normal',
     padding: 0
   },
@@ -40,6 +40,9 @@ export default StyleSheet.create({
     tintColor: white,
     height: CLOSE_ICON_SIZE,
     width: CLOSE_ICON_SIZE
+  },
+  closeIconRed: {
+    backgroundColor: monzaRed
   },
   closeIconContainer: {
     alignItems: 'center',

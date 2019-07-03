@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -7,6 +7,8 @@ import Routes from '@constants/routes';
 import withLoading from '@components/LoadingHOC';
 import booksActions from '@redux/books/actions';
 import Book from '@components/Book';
+import CustomButton from '@components/CustomButton';
+import searchIcon from '@assets/ic_search.png';
 
 import styles from './styles';
 
@@ -26,6 +28,15 @@ class BookList extends Component {
     );
   };
 
+  goToSearch = () => {
+    const { navigation } = this.props;
+    navigation.dispatch(
+      NavigationActions.navigate({
+        routeName: Routes.SearchScreen
+      })
+    );
+  };
+
   keyExtractor = ({ id }) => id;
 
   renderItem = ({ item }) => <Book item={item} handleOnPress={this.goToDetails} />;
@@ -33,12 +44,20 @@ class BookList extends Component {
   render() {
     const { books } = this.props;
     return (
-      <FlatList
-        data={books}
-        renderItem={this.renderItem}
-        keyExtractor={this.keyExtractor}
-        style={styles.container}
-      />
+      <View style={styles.container}>
+        <CustomButton
+          icon={searchIcon}
+          buttonStyles={styles.searchButtonStyle}
+          iconStyles={styles.searchButtonIcon}
+          onPress={this.goToSearch}
+        />
+        <FlatList
+          data={books}
+          renderItem={this.renderItem}
+          keyExtractor={this.keyExtractor}
+          style={styles.booksContainer}
+        />
+      </View>
     );
   }
 }
@@ -67,4 +86,6 @@ const mapStateToProps = store => ({
 
 const BookDetailsWithLoading = withLoading(BookList);
 
-export default connect(mapStateToProps)(BookDetailsWithLoading);
+const BookDetailWithConnect = connect(mapStateToProps)(BookDetailsWithLoading);
+
+export default BookDetailWithConnect;

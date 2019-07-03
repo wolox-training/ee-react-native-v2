@@ -6,3 +6,6 @@ export const red = '#F00';
 export const transparent = 'transparent';
 export const gray = '#ACB2AC';
 export const lightGray = '#CFD0CF';
+export const tundoraBlack = '#404040';
+export const black = '#000';
+export const monzaRed = '#CF062F';

@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import { View, ImageBackground, FlatList, Text } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import SearchBar from '@components/SearchBar';
-import headerImg from '@assets/bc_nav_bar.png';
+import Immutable from 'seamless-immutable';
 import Routes from '@constants/routes';
-import Book from '@components/Book';
 
-import styles from './styles';
+import SearchScreen from './layout';
 
-class SearchScreen extends Component {
+class SearchScreenContainer extends Component {
   state = {
-    booksFiltered: []
+    booksFiltered: [],
+    searchString: ''
   };
 
   goToDetails = item => {
@@ -27,36 +25,41 @@ class SearchScreen extends Component {
 
   searchTitle = value => book => value !== '' && book.title.toLowerCase().includes(value.toLowerCase());
 
-  handleSearch = value => {
-    const { books } = this.props;
-    const booksFiltered = books.filter(this.searchTitle(value));
-    this.setState({ booksFiltered });
+  compareBookTitle = (bookA, bookB) => {
+    if (bookA.title < bookB.title) return -1;
+    if (bookB.title < bookA.title) return 1;
+    return 0;
   };
 
-  keyExtractor = ({ id }) => id;
+  handleSearch = value => {
+    const { books } = this.props;
+    const booksFiltered = Immutable.asMutable(books.filter(this.searchTitle(value))).sort(
+      this.compareBookTitle
+    );
+    this.setState({ booksFiltered, searchString: value });
+  };
 
-  renderItem = ({ item }) => <Book item={item} handleOnPress={this.goToDetails} />;
+  handleClose = () => {
+    const { navigation } = this.props;
+    navigation.dispatch(NavigationActions.back());
+  };
 
   render() {
-    const { booksFiltered } = this.state;
+    const { booksFiltered, searchString } = this.state;
+    const searchNotEmpty = searchString.length !== 0;
     return (
-      <View style={styles.container}>
-        <ImageBackground source={headerImg} style={styles.headerImage}>
-          <SearchBar containerStyles={styles.barContainerStyle} onSearch={this.handleSearch} />
-        </ImageBackground>
-        <FlatList
-          data={booksFiltered}
-          renderItem={this.renderItem}
-          keyExtractor={this.keyExtractor}
-          style={styles.booksContainer}
-          ListEmptyComponent={<Text>NO HAY</Text>}
-        />
-      </View>
+      <SearchScreen
+        onSearch={this.handleSearch}
+        onClose={this.handleClose}
+        goToDetails={this.goToDetails}
+        booksFiltered={booksFiltered}
+        searchNotEmpty={searchNotEmpty}
+      />
     );
   }
 }
 
-SearchScreen.propTypes = {
+SearchScreenContainer.propTypes = {
   navigation: PropTypes.shape({
     dispatch: PropTypes.func
   }),
@@ -77,4 +80,10 @@ const mapStateToProps = store => ({
   books: store.books.books
 });
 
-export default connect(mapStateToProps)(SearchScreen);
+const SearchScreenConnected = connect(mapStateToProps)(SearchScreenContainer);
+
+SearchScreenConnected.navigationOptions = {
+  header: null
+};
+
+export default SearchScreenConnected;
