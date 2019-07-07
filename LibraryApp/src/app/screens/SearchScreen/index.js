@@ -41,7 +41,6 @@ class SearchScreenContainer extends Component {
   render() {
     const { booksFiltered, searchString } = this.props;
     const searchNotEmpty = searchString.length !== 0;
-    console.log('holi');
     return (
       <SearchScreen
         onSearch={this.handleSearch}

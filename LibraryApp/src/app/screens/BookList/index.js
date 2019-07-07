@@ -28,7 +28,7 @@ class BookList extends Component {
 
   keyExtractor = ({ id }) => id;
 
-  renderItem = ({ item }) => <Book item={item} handleOnPress={this.goToDetails} />;
+  renderItem = ({ item, index }) => <Book item={item} index={index} handleOnPress={this.goToDetails} />;
 
   render() {
     const { books } = this.props;
