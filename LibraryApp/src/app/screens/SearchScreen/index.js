@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Immutable from 'seamless-immutable';
 import Routes from '@constants/routes';
 
 import SearchScreen from './layout';
@@ -33,9 +32,7 @@ class SearchScreenContainer extends Component {
 
   handleSearch = value => {
     const { books } = this.props;
-    const booksFiltered = Immutable.asMutable(books.filter(this.searchTitle(value))).sort(
-      this.compareBookTitle
-    );
+    const booksFiltered = [...books].filter(this.searchTitle(value)).sort(this.compareBookTitle);
     this.setState({ booksFiltered, searchString: value });
   };
 
