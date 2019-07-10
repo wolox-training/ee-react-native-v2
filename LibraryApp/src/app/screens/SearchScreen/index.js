@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Immutable from 'seamless-immutable';
 import { createSelector } from 'reselect';
 import Routes from '@constants/routes';
 import bookActions from '@redux/books/actions';
@@ -41,7 +40,6 @@ class SearchScreenContainer extends Component {
   render() {
     const { booksFiltered, searchString } = this.props;
     const searchNotEmpty = searchString.length !== 0;
-    console.log('holi');
     return (
       <SearchScreen
         onSearch={this.handleSearch}
@@ -88,8 +86,7 @@ const compareBookTitle = (bookA, bookB) => {
 const makeGetFilteredBooks = createSelector(
   bookSelector,
   searchStringSelector,
-  (books, searchString) =>
-    Immutable(Immutable.asMutable(books.filter(searchTitle(searchString))).sort(compareBookTitle))
+  (books, searchString) => [...books].filter(searchTitle(searchString)).sort(compareBookTitle)
 );
 
 const mapStateToProps = store => ({
