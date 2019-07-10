@@ -10,10 +10,10 @@ class Book extends Component {
 
   render() {
     const { item } = this.props;
-    const { image_url: coverImg, title, author } = item;
+    const { image: coverImg, title, author } = item;
     return (
       <TouchableOpacity style={styles.container} onPress={this.onPress}>
-        <Image source={(coverImg && { uri: coverImg }) || defaultPlaceholder} style={styles.coverImage} />
+        <Image source={(coverImg && { uri: coverImg.url }) || defaultPlaceholder} style={styles.coverImage} />
         <View style={styles.rightContainer}>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.author}>{author}</Text>
@@ -26,7 +26,9 @@ class Book extends Component {
 Book.propTypes = {
   item: PropTypes.shape({
     author: PropTypes.string,
-    coverImg: PropTypes.string,
+    coverImg: PropTypes.shape({
+      url: PropTypes.string
+    }),
     genre: PropTypes.string,
     id: PropTypes.number,
     publisher: PropTypes.string,

@@ -9,11 +9,14 @@ import styles from './styles';
 
 class BookDetail extends Component {
   render() {
-    const { image_url: coverImage, title, author, year, genre, available } = this.props.item;
+    const { image: coverImage, title, author, year, genre, available } = this.props.item;
     return (
       <View style={styles.infoContainer}>
         <View style={styles.detailsContainer}>
-          <Image source={coverImage ? { uri: coverImage } : defaultPlaceholder} style={styles.coverImage} />
+          <Image
+            source={coverImage ? { uri: coverImage.url } : defaultPlaceholder}
+            style={styles.coverImage}
+          />
           <ScrollView style={styles.rightContainer}>
             <Text style={styles.title}>{title}</Text>
             <Text style={available ? styles.available : styles.unavailable}>
@@ -50,7 +53,9 @@ BookDetail.propTypes = {
     genre: PropTypes.string,
     publisher: PropTypes.string,
     year: PropTypes.string,
-    image_url: PropTypes.string,
+    image: PropTypes.shape({
+      url: PropTypes.string
+    }),
     available: PropTypes.bool
   })
 };
