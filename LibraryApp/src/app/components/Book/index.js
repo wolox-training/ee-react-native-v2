@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import defaultPlaceholder from '@assets/book_placeholder.png';
+import { bookPropType } from '@propTypes/books';
 
 import styles from './styles';
 
@@ -24,48 +25,8 @@ class Book extends Component {
 }
 
 Book.propTypes = {
-  item: PropTypes.shape({
-    author: PropTypes.string,
-    coverImg: PropTypes.shape({
-      url: PropTypes.string
-    }),
-    genre: PropTypes.string,
-    id: PropTypes.number,
-    publisher: PropTypes.string,
-    title: PropTypes.string,
-    year: PropTypes.string
-  }).isRequired,
+  item: bookPropType.isRequired,
   handleOnPress: PropTypes.func
 };
-
-/*
-  {
-      "id": 57794,
-      "author": "Rufus Bartoletti",
-      "title": "Dying of the Light",
-      "image": "http://bartolettihyatt.io/kasi",
-      "editor": "Flame Tree Publishing",
-      "year": "1962",
-      "genre": "Short story",
-      "created_at": "2019-03-19T14:59:38.835Z",
-      "updated_at": "2019-03-19T14:59:38.835Z",
-      "rents": []
-    }
-*/
-
-/*
-    Book.propTypes = {
-  item: PropTypes.shape({
-    author: PropTypes.string,
-    coverImg: PropTypes.string,
-    genre: PropTypes.string,
-    id: PropTypes.number,
-    publisher: PropTypes.string,
-    title: PropTypes.string,
-    year: PropTypes.string
-  }).isRequired,
-  handleOnPress: PropTypes.func
-};
-*/
 
 export default Book;

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { createSelector } from 'reselect';
 import Routes from '@constants/routes';
 import bookActions from '@redux/books/actions';
+import { bookPropType } from '@propTypes/books';
 
 import SearchScreen from './layout';
 
@@ -56,17 +57,7 @@ SearchScreenContainer.propTypes = {
   navigation: PropTypes.shape({
     dispatch: PropTypes.func
   }),
-  booksFiltered: PropTypes.arrayOf(
-    PropTypes.shape({
-      author: PropTypes.string,
-      coverImg: PropTypes.string,
-      editor: PropTypes.string,
-      genre: PropTypes.string,
-      id: PropTypes.number,
-      title: PropTypes.string,
-      year: PropTypes.string
-    }).isRequired
-  ),
+  booksFiltered: PropTypes.arrayOf(bookPropType).isRequired,
   searchString: PropTypes.string
 };
 
@@ -90,15 +81,8 @@ const makeGetFilteredBooks = createSelector(
 );
 
 const mapStateToProps = store => ({
-  books: bookSelector(store),
   searchString: searchStringSelector(store),
   booksFiltered: makeGetFilteredBooks(store)
 });
 
-const SearchScreenConnected = connect(mapStateToProps)(SearchScreenContainer);
-
-SearchScreenConnected.navigationOptions = {
-  header: null
-};
-
-export default SearchScreenConnected;
+export default connect(mapStateToProps)(SearchScreenContainer);

@@ -42,14 +42,6 @@ const privateActionCreators = {
         })
       );
     }
-  },
-  logoutAndNavigate: () => dispatch => {
-    dispatch({ type: actions.LOGOUT });
-    dispatch(
-      NavigationActions.navigate({
-        routeName: Routes.Login
-      })
-    );
   }
 };
 
@@ -71,7 +63,12 @@ const actionCreators = {
     }
   },
   logout: () => dispatch => {
-    dispatch(privateActionCreators.logoutAndNavigate());
+    dispatch({ type: actions.LOGOUT });
+    dispatch(
+      NavigationActions.navigate({
+        routeName: Routes.Login
+      })
+    );
     AuthService.logout();
   }
 };
