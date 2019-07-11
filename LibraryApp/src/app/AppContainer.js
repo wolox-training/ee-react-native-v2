@@ -32,7 +32,12 @@ const BooksNavigator = createStackNavigator(
       }
     },
     [Routes.BookDetails]: { screen: BookDetails },
-    [Routes.SearchScreen]: { screen: SearchScreen }
+    [Routes.SearchScreen]: {
+      screen: SearchScreen,
+      navigationOptions: {
+        header: null
+      }
+    }
   },
   {
     defaultNavigationOptions: {

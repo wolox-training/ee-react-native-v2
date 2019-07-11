@@ -3,6 +3,7 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Routes from '@constants/routes';
+import { bookPropType } from '@propTypes/books';
 
 import SearchScreen from './layout';
 
@@ -60,27 +61,11 @@ SearchScreenContainer.propTypes = {
   navigation: PropTypes.shape({
     dispatch: PropTypes.func
   }),
-  books: PropTypes.arrayOf(
-    PropTypes.shape({
-      author: PropTypes.string,
-      coverImg: PropTypes.string,
-      editor: PropTypes.string,
-      genre: PropTypes.string,
-      id: PropTypes.number,
-      title: PropTypes.string,
-      year: PropTypes.string
-    }).isRequired
-  )
+  books: PropTypes.arrayOf(bookPropType).isRequired
 };
 
 const mapStateToProps = store => ({
   books: store.books.books
 });
 
-const SearchScreenConnected = connect(mapStateToProps)(SearchScreenContainer);
-
-SearchScreenConnected.navigationOptions = {
-  header: null
-};
-
-export default SearchScreenConnected;
+export default connect(mapStateToProps)(SearchScreenContainer);
