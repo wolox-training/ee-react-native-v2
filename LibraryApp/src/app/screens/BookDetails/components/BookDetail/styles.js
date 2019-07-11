@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { greenDeco, white, red } from '@constants/colors';
+import { DEFAULT_BUTTON_WIDTH } from '@constants/dimensions';
 
 const CONTAINER_HEIGHT = 300;
 const CONTAINER_PADDING_V = 20;
@@ -47,12 +48,14 @@ export default StyleSheet.create({
     fontWeight: 'bold'
   },
   buttonsContainer: {
+    alignItems: 'center',
     height: '50%',
     justifyContent: 'space-between',
     paddingVertical: BUTTONS_CONTAINER_PADDING_V
   },
-  buttonsMargin: {
-    marginVertical: BUTTON_MARGIN_V
+  buttonsStyle: {
+    marginVertical: BUTTON_MARGIN_V,
+    width: DEFAULT_BUTTON_WIDTH
   },
   buttonTextStyle: {
     fontSize: FONT_HEIGHT_MEDIUM

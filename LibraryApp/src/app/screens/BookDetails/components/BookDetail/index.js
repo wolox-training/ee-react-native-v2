@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { View, Text, Image, ScrollView } from 'react-native';
 import defaultPlaceholder from '@assets/book_placeholder.png';
 import CustomButton from '@components/CustomButton';
+import RentButton from '@components/RentButton';
 import { bookPropType } from '@propTypes/books';
 
-import { ADD_TO_WISHLIST, RENT, UNAVAILABLE, AVAILABLE } from './constants';
+import { ADD_TO_WISHLIST, UNAVAILABLE, AVAILABLE } from './constants';
 import styles from './styles';
 
 class BookDetail extends Component {
@@ -31,14 +32,10 @@ class BookDetail extends Component {
           <CustomButton
             title={ADD_TO_WISHLIST}
             whiteTheme
-            buttonStyles={styles.buttonsMargin}
+            buttonStyles={styles.buttonsStyle}
             textStyles={styles.buttonTextStyle}
           />
-          <CustomButton
-            title={RENT}
-            buttonStyles={styles.buttonsMargin}
-            textStyles={styles.buttonTextStyle}
-          />
+          <RentButton buttonStyles={styles.buttonsStyle} textStyles={styles.buttonTextStyle} />
         </View>
       </View>
     );

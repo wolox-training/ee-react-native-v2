@@ -9,3 +9,4 @@ export const lightGray = '#CFD0CF';
 export const tundoraBlack = '#404040';
 export const black = '#000';
 export const monzaRed = '#CF062F';
+export const laurelGreen = '#037500';
