@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
-import PropTypes from 'prop-types';
+import { bookPropType } from '@propTypes/books';
 
 import styles from './styles';
 
@@ -18,12 +18,7 @@ function Comment({ item }) {
 }
 
 Comment.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.number,
-    username: PropTypes.string,
-    avatar: PropTypes.number,
-    comment: PropTypes.string
-  })
+  item: bookPropType
 };
 
 export default Comment;

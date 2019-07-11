@@ -7,6 +7,7 @@ import Routes from '@constants/routes';
 import withLoading from '@components/LoadingHOC';
 import booksActions from '@redux/books/actions';
 import Book from '@components/Book';
+import { bookPropType } from '@propTypes/books';
 
 import styles from './styles';
 
@@ -47,17 +48,7 @@ BookList.propTypes = {
   navigation: PropTypes.shape({
     dispatch: PropTypes.func
   }),
-  books: PropTypes.arrayOf(
-    PropTypes.shape({
-      author: PropTypes.string,
-      coverImg: PropTypes.string,
-      editor: PropTypes.string,
-      genre: PropTypes.string,
-      id: PropTypes.number,
-      title: PropTypes.string,
-      year: PropTypes.string
-    }).isRequired
-  )
+  books: PropTypes.arrayOf(bookPropType)
 };
 
 const mapStateToProps = store => ({

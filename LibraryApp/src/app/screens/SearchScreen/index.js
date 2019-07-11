@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Immutable from 'seamless-immutable';
 import { createSelector } from 'reselect';
 import Routes from '@constants/routes';
 import bookActions from '@redux/books/actions';
+import { bookPropType } from '@propTypes/books';
 
 import SearchScreen from './layout';
 
@@ -57,17 +57,7 @@ SearchScreenContainer.propTypes = {
   navigation: PropTypes.shape({
     dispatch: PropTypes.func
   }),
-  booksFiltered: PropTypes.arrayOf(
-    PropTypes.shape({
-      author: PropTypes.string,
-      coverImg: PropTypes.string,
-      editor: PropTypes.string,
-      genre: PropTypes.string,
-      id: PropTypes.number,
-      title: PropTypes.string,
-      year: PropTypes.string
-    }).isRequired
-  ),
+  booksFiltered: PropTypes.arrayOf(bookPropType).isRequired,
   searchString: PropTypes.string
 };
 
@@ -87,20 +77,12 @@ const compareBookTitle = (bookA, bookB) => {
 const makeGetFilteredBooks = createSelector(
   bookSelector,
   searchStringSelector,
-  (books, searchString) =>
-    Immutable(Immutable.asMutable(books.filter(searchTitle(searchString))).sort(compareBookTitle))
+  (books, searchString) => [...books].filter(searchTitle(searchString)).sort(compareBookTitle)
 );
 
 const mapStateToProps = store => ({
-  books: bookSelector(store),
   searchString: searchStringSelector(store),
   booksFiltered: makeGetFilteredBooks(store)
 });
 
-const SearchScreenConnected = connect(mapStateToProps)(SearchScreenContainer);
-
-SearchScreenConnected.navigationOptions = {
-  header: null
-};
-
-export default SearchScreenConnected;
+export default connect(mapStateToProps)(SearchScreenContainer);

@@ -16,7 +16,6 @@ export const setCurrentUser = async ({ token, client, uid }) => {
   const accessToken = [TOKEN_STORAGE, JSON.stringify(token)];
   const userId = [UID_STORAGE, JSON.stringify(uid)];
   const clientNumber = [CLIENT_STORAGE, JSON.stringify(client)];
-  // debugger;
   return AsyncStorage.multiSet([accessToken, clientNumber, userId]);
 };
 
@@ -27,17 +26,11 @@ export const getCurrentUser = async () => {
     client: JSON.parse(values[1][1]),
     uid: JSON.parse(values[2][1])
   };
-  // debugger;
   return {
     headers,
     authenticated: headers.token && headers.client && headers.uid
   };
 };
-
-// export const initialAuth = async dispatch => {
-//   const token = await getCurrentUser();
-//   if (token) dispatch(authActions.initRemembered());
-// };
 
 export const login = (email, password) => api.post(LOGIN_ENDPOINT, { email, password });
 
