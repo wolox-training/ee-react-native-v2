@@ -4,6 +4,7 @@ import {
   createReactNavigationReduxMiddleware,
   createNavigationReducer
 } from 'react-navigation-redux-helpers';
+import { fetchMiddleware, configureMergeState } from 'redux-recompose';
 import authReducer from '@redux/auth/reducer';
 import booksReducer from '@redux/books/reducer';
 import { RootNavigator } from '@app/AppContainer';
@@ -11,6 +12,8 @@ import { RootNavigator } from '@app/AppContainer';
 import Reactotron from '../../ReactotronConfig';
 
 const nav = createNavigationReducer(RootNavigator);
+
+configureMergeState((state, diff) => state.merge(diff));
 
 const reducers = {
   auth: authReducer,
@@ -25,6 +28,7 @@ const enhancers = [];
 
 middlewares.push(createReactNavigationReduxMiddleware(store => store.nav));
 middlewares.push(thunk);
+middlewares.push(fetchMiddleware);
 
 enhancers.push(applyMiddleware(...middlewares));
 
