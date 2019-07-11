@@ -9,7 +9,9 @@ import BookList from '@screens/BookList';
 import BookDetails from '@screens/BookDetails';
 import EmptyScreen from '@screens/EmptyScreen';
 import Login from '@screens/Login';
+import SearchScreen from '@screens/SearchScreen';
 import LogoutButton from '@components/LogoutButton';
+import SearchButton from '@components/SearchButton';
 
 import headerImg from './assets/bc_nav_bar.png';
 import backImg from './assets/ic_back.png';
@@ -19,10 +21,23 @@ import settingsImg from './assets/ic_settings.png';
 import settingsImgActive from './assets/ic_settings_active.png';
 import styles from './styles';
 
+const APP_TITLE = 'LIBRARY';
+
 const BooksNavigator = createStackNavigator(
   {
-    [Routes.BookList]: { screen: BookList },
-    [Routes.BookDetails]: { screen: BookDetails }
+    [Routes.BookList]: {
+      screen: BookList,
+      navigationOptions: {
+        headerLeft: <SearchButton />
+      }
+    },
+    [Routes.BookDetails]: { screen: BookDetails },
+    [Routes.SearchScreen]: {
+      screen: SearchScreen,
+      navigationOptions: {
+        header: null
+      }
+    }
   },
   {
     defaultNavigationOptions: {
@@ -32,11 +47,13 @@ const BooksNavigator = createStackNavigator(
       headerBackTitle: null,
       headerTransparent: true,
       headerBackImage: <Image source={backImg} style={styles.headerBackImgStyles} />,
-      headerRight: <LogoutButton />
+      headerRight: <LogoutButton />,
+      headerTitle: APP_TITLE
     },
     cardStyle: {
       backgroundColor: blackSqueeze
-    }
+    },
+    headerLayoutPreset: 'center'
   }
 );
 

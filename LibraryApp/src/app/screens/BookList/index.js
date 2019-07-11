@@ -6,15 +6,12 @@ import PropTypes from 'prop-types';
 import Routes from '@constants/routes';
 import withLoading from '@components/LoadingHOC';
 import booksActions from '@redux/books/actions';
+import Book from '@components/Book';
+import { bookPropType } from '@propTypes/books';
 
 import styles from './styles';
-import Book from './components/Book';
-
-const APP_TITLE = 'LIBRARY';
 
 class BookList extends Component {
-  static navigationOptions = () => ({ title: APP_TITLE });
-
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(booksActions.getBooks());
@@ -51,17 +48,7 @@ BookList.propTypes = {
   navigation: PropTypes.shape({
     dispatch: PropTypes.func
   }),
-  books: PropTypes.arrayOf(
-    PropTypes.shape({
-      author: PropTypes.string,
-      coverImg: PropTypes.string,
-      editor: PropTypes.string,
-      genre: PropTypes.string,
-      id: PropTypes.number,
-      title: PropTypes.string,
-      year: PropTypes.string
-    }).isRequired
-  )
+  books: PropTypes.arrayOf(bookPropType)
 };
 
 const mapStateToProps = store => ({
@@ -69,6 +56,6 @@ const mapStateToProps = store => ({
   books: store.books.books
 });
 
-const BookDetailsWithLoading = withLoading(BookList);
+const BookListWithLoading = withLoading(BookList);
 
-export default connect(mapStateToProps)(BookDetailsWithLoading);
+export default connect(mapStateToProps)(BookListWithLoading);

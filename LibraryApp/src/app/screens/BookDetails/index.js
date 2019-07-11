@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
+import { bookPropType } from '@propTypes/books';
 
 import styles from './styles';
 import CommentsList from './components/CommentsList';
@@ -32,16 +33,7 @@ BookDetails.propTypes = {
   navigation: PropTypes.shape({
     state: PropTypes.shape({
       params: PropTypes.shape({
-        item: PropTypes.shape({
-          id: PropTypes.number,
-          author: PropTypes.string,
-          title: PropTypes.string,
-          genre: PropTypes.string,
-          publisher: PropTypes.string,
-          year: PropTypes.string,
-          image_url: PropTypes.string,
-          available: PropTypes.bool
-        })
+        item: bookPropType
       })
     })
   })

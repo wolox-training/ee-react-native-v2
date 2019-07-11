@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity, ViewPropTypes } from 'react-native';
+import { Text, TouchableOpacity, ViewPropTypes, Image } from 'react-native';
 import PropTypes from 'prop-types';
 
 import styles from './styles';
 
 class CustomButton extends Component {
   render() {
-    const { title, whiteTheme, buttonStyles, textStyles, onPress } = this.props;
-    const titleToUpper = title.toUpperCase();
+    const { title, icon, whiteTheme, buttonStyles, textStyles, iconStyles, onPress } = this.props;
+    const titleToUpper = title && title.toUpperCase();
     return (
       <TouchableOpacity
         style={[styles.button, whiteTheme && styles.whiteThemeButton, buttonStyles]}
         onPress={onPress}
       >
-        <Text style={[styles.text, whiteTheme && styles.whiteThemeText, textStyles]}>{titleToUpper}</Text>
+        {title && (
+          <Text style={[styles.text, whiteTheme && styles.whiteThemeText, textStyles]}>{titleToUpper}</Text>
+        )}
+        {icon && <Image source={icon} style={iconStyles} />}
       </TouchableOpacity>
     );
   }
@@ -22,9 +25,11 @@ class CustomButton extends Component {
 CustomButton.propTypes = {
   buttonStyles: ViewPropTypes.style,
   textStyles: Text.propTypes.style,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   whiteTheme: PropTypes.bool,
-  onPress: PropTypes.func
+  onPress: PropTypes.func,
+  icon: PropTypes.number,
+  iconStyles: ViewPropTypes.style
 };
 
 CustomButton.defaultProps = {

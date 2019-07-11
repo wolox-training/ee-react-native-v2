@@ -8,6 +8,7 @@
         "@components": "./src/app/components",
         "@config": "./src/config",
         "@constants": "./src/constants",
+        "@propTypes": "./src/propTypes",
         "@redux": "./src/redux",
         "@screens": "./src/app/screens",
         "@services": "./src/services",
