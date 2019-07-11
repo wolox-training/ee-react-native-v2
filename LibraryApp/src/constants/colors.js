@@ -10,3 +10,5 @@ export const tundoraBlack = '#404040';
 export const black = '#000';
 export const monzaRed = '#CF062F';
 export const laurelGreen = '#037500';
+export const ceruleanBlue = '#02A3EB';
+export const scooterLightblue = '#30C4C5';

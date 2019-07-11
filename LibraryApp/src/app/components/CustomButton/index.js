@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity, ViewPropTypes, Image, Animated } from 'react-native';
+import { Text, ViewPropTypes, Image, Animated } from 'react-native';
 import PropTypes from 'prop-types';
-import { pictonBlue } from '@constants/colors';
+import { transparent } from '@constants/colors';
 import { DEFAULT_BUTTON_WIDTH } from '@constants/dimensions';
+import TouchableGradient from '@components/TouchableGradient';
 
 import styles from './styles';
 
-const AnimatedButton = Animated.createAnimatedComponent(TouchableOpacity);
+const AnimatedButton = Animated.createAnimatedComponent(TouchableGradient);
 const ANIM_DURATION = 2000;
 
 class CustomButton extends Component {
@@ -24,32 +25,36 @@ class CustomButton extends Component {
   };
 
   render() {
-    const { title, icon, whiteTheme, buttonStyles, textStyles, iconStyles, onPressStyles } = this.props;
+    const {
+      title,
+      icon,
+      whiteTheme,
+      buttonStyles,
+      textStyles,
+      iconStyles,
+      onPressStyles,
+      color,
+      colors,
+      borderColor
+    } = this.props;
     const titleToUpper = title && title.toUpperCase();
     const { pressAnim } = this.state;
+    const colorsGradient = colors || [color, color];
     return (
       <AnimatedButton
         style={[
           styles.button,
           whiteTheme && styles.whiteThemeButton,
           buttonStyles,
-          onPressStyles?.color && {
-            backgroundColor: pressAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [pictonBlue, onPressStyles.color]
-            }),
-            borderColor: pressAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [pictonBlue, onPressStyles.color]
-            })
-          },
           onPressStyles?.width && {
             width: pressAnim.interpolate({
               inputRange: [0, 1],
               outputRange: [DEFAULT_BUTTON_WIDTH, onPressStyles.width]
             })
-          }
+          },
+          borderColor && { borderColor }
         ]}
+        colors={colorsGradient}
         onPress={this.onPress}
       >
         {title && (
@@ -69,11 +74,15 @@ CustomButton.propTypes = {
   onPress: PropTypes.func,
   icon: PropTypes.number,
   iconStyles: ViewPropTypes.style,
-  onPressStyles: PropTypes.oneOf([ViewPropTypes, Text.propTypes.style])
+  onPressStyles: PropTypes.oneOf([ViewPropTypes, Text.propTypes.style]),
+  color: PropTypes.string,
+  colors: PropTypes.arrayOf(PropTypes.string),
+  borderColor: PropTypes.string
 };
 
 CustomButton.defaultProps = {
-  whiteTheme: false
+  whiteTheme: false,
+  color: transparent
 };
 
 export default CustomButton;

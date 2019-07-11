@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CustomButton from '@components/CustomButton';
 import checkIcon from '@assets/icon_check_green.png';
+import { ceruleanBlue, scooterLightblue, laurelGreen } from '@constants/colors';
 
 import styles from './styles';
 
@@ -17,6 +18,7 @@ class RentButton extends Component {
 
   render() {
     const { isPressed } = this.state;
+    const colors = isPressed ? [laurelGreen, laurelGreen] : [ceruleanBlue, scooterLightblue];
     return (
       <CustomButton
         title={!isPressed && RENT}
@@ -24,6 +26,8 @@ class RentButton extends Component {
         icon={isPressed && checkIcon}
         iconStyles={isPressed && styles.buttonRentIconStyle}
         onPress={this.handlePress}
+        colors={colors}
+        borderColor={isPressed && laurelGreen}
         {...this.props}
       />
     );
