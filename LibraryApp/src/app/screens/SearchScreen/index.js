@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { createSelector } from 'reselect';
 import Routes from '@constants/routes';
+import bookActions from '@redux/books/actions';
 import { bookPropType } from '@propTypes/books';
 
 import SearchScreen from './layout';
 
 class SearchScreenContainer extends Component {
-  state = {
-    booksFiltered: [],
-    searchString: ''
-  };
-
   goToDetails = item => {
     const { navigation } = this.props;
     navigation.dispatch(
@@ -32,9 +29,8 @@ class SearchScreenContainer extends Component {
   };
 
   handleSearch = value => {
-    const { books } = this.props;
-    const booksFiltered = [...books].filter(this.searchTitle(value)).sort(this.compareBookTitle);
-    this.setState({ booksFiltered, searchString: value });
+    const { dispatch } = this.props;
+    dispatch(bookActions.setSearchString(value));
   };
 
   handleClose = () => {
@@ -43,7 +39,7 @@ class SearchScreenContainer extends Component {
   };
 
   render() {
-    const { booksFiltered, searchString } = this.state;
+    const { booksFiltered, searchString } = this.props;
     const searchNotEmpty = searchString.length !== 0;
     return (
       <SearchScreen
@@ -61,11 +57,32 @@ SearchScreenContainer.propTypes = {
   navigation: PropTypes.shape({
     dispatch: PropTypes.func
   }),
-  books: PropTypes.arrayOf(bookPropType).isRequired
+  booksFiltered: PropTypes.arrayOf(bookPropType).isRequired,
+  searchString: PropTypes.string
 };
 
+const bookSelector = store => store.books.books;
+
+const searchStringSelector = store => store.books.searchString;
+
+const searchTitle = searchString => book =>
+  searchString !== '' && book.title.toLowerCase().includes(searchString.toLowerCase());
+
+const compareBookTitle = (bookA, bookB) => {
+  if (bookA.title < bookB.title) return -1;
+  if (bookB.title < bookA.title) return 1;
+  return 0;
+};
+
+const makeGetFilteredBooks = createSelector(
+  bookSelector,
+  searchStringSelector,
+  (books, searchString) => [...books].filter(searchTitle(searchString)).sort(compareBookTitle)
+);
+
 const mapStateToProps = store => ({
-  books: store.books.books
+  searchString: searchStringSelector(store),
+  booksFiltered: makeGetFilteredBooks(store)
 });
 
 export default connect(mapStateToProps)(SearchScreenContainer);
