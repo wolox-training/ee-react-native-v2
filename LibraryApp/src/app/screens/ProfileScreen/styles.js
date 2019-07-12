@@ -25,18 +25,12 @@ export default StyleSheet.create({
     height: '50%',
     backgroundColor: white,
     borderRadius: CONTAINER_BORDER_RADIUS,
+    justifyContent: 'center',
     paddingVertical: CONTAINER_PADDING_V
   },
-  imageContainer: {
-    alignItems: 'center',
-    borderRadius: BORDER_RADIUS,
-    justifyContent: 'center',
-    height: IMAGE_CONTAINER_HEIGHT,
-    width: IMAGE_CONTAINER_WIDTH
-  },
   profileImage: {
-    height: '100%',
-    width: '100%',
+    height: IMAGE_CONTAINER_HEIGHT,
+    width: IMAGE_CONTAINER_WIDTH,
     borderRadius: BORDER_RADIUS
   },
   rightInfoContainer: {

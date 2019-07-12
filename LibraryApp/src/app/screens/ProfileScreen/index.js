@@ -26,9 +26,7 @@ class ProfileScreen extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.infoContainer}>
-          <View style={styles.imageContainer}>
-            <Image source={profileImage} style={styles.profileImage} />
-          </View>
+          <Image source={profileImage} style={styles.profileImage} />
           <View style={styles.rightInfoContainer}>
             <Text style={[styles.textStyle, styles.titleStyle]}>{PROFILE_NAME}</Text>
             <Text style={[styles.textStyle, styles.emailStyle]}>{PROFILE_EMAIL}</Text>
