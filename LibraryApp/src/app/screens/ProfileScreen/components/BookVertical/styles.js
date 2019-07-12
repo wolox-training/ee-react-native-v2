@@ -2,20 +2,22 @@ import { StyleSheet } from 'react-native';
 import { ceruleanBlue } from '@constants/colors';
 
 const CONTAINER_HEIGHT = 170;
+const CONTAINER_BORDER_RADIUS = 10;
+const CONTAINER_PADDING_HORIZONTAL = 10;
+const IMAGE_HEIGHT = 100;
+const IMAGE_WIDTH = 65;
 
 export default StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: ceruleanBlue,
-    borderRadius: 10,
+    borderRadius: CONTAINER_BORDER_RADIUS,
     height: CONTAINER_HEIGHT,
     justifyContent: 'center',
-    paddingHorizontal: 10
+    paddingHorizontal: CONTAINER_PADDING_HORIZONTAL
   },
   image: {
-    height: 100,
-    width: 65
-  },
-  title: {},
-  author: {}
+    height: IMAGE_HEIGHT,
+    width: IMAGE_WIDTH
+  }
 });

@@ -10,9 +10,9 @@ class BookVertical extends Component {
     const { image, title, author } = item;
     return (
       <View style={styles.container}>
-        <Image source={{ uri: image.url }} style={styles.image} resizeMethod="resize" />
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.author}>{author}</Text>
+        <Image source={{ uri: image.url }} style={styles.image} />
+        <Text>{title}</Text>
+        <Text>{author}</Text>
       </View>
     );
   }
