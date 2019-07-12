@@ -26,6 +26,7 @@ export default StyleSheet.create({
     backgroundColor: white,
     borderRadius: CONTAINER_BORDER_RADIUS,
     justifyContent: 'center',
+    marginHorizontal: RIGHT_INFO_CONT_MARGIN_H,
     paddingVertical: CONTAINER_PADDING_V
   },
   profileImage: {
@@ -54,6 +55,7 @@ export default StyleSheet.create({
     height: '45%',
     backgroundColor: white,
     borderRadius: CONTAINER_BORDER_RADIUS,
+    justifyContent: 'center',
     marginTop: RECENT_BOOKS_MARGIN_TOP,
     marginHorizontal: MARGIN_HORIZONTAL
   },

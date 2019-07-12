@@ -36,9 +36,7 @@ class ProfileScreen extends Component {
         </View>
         <View style={styles.recentBooksContainer}>
           <Text style={styles.carouselTitle}>{LAST_BOOKS_VIEWED}</Text>
-          <View>
-            <Carousel data={lastViewedBooks} renderItem={this.renderItem} sliderWidth={300} itemWidth={200} />
-          </View>
+          <Carousel data={lastViewedBooks} renderItem={this.renderItem} sliderWidth={300} itemWidth={200} />
         </View>
       </View>
     );
