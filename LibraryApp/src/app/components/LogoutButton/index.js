@@ -8,10 +8,7 @@ import styles from './styles';
 const LOGOUT_TEXT = 'LOGOUT';
 
 class LogoutButton extends Component {
-  handleLogout = () => {
-    const { dispatch } = this.props;
-    dispatch(authActions.logout());
-  };
+  handleLogout = () => this.props.dispatch(authActions.logout());
 
   render() {
     return (

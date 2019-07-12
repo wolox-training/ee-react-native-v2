@@ -57,7 +57,12 @@ const BooksNavigator = createStackNavigator(
         headerTitle: BOOK_DETAIL_LABEL
       }
     },
-    [Routes.SearchScreen]: { screen: SearchScreen }
+    [Routes.SearchScreen]: {
+      screen: SearchScreen,
+      navigationOptions: {
+        header: null
+      }
+    }
   },
   stackNavigationOptions
 );

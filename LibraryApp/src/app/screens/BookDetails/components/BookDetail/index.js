@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, Image, ScrollView } from 'react-native';
-import PropTypes from 'prop-types';
 import defaultPlaceholder from '@assets/book_placeholder.png';
 import CustomButton from '@components/CustomButton';
 import RentButton from '@components/RentButton';
+import { bookPropType } from '@propTypes/books';
 
 import { ADD_TO_WISHLIST, UNAVAILABLE, AVAILABLE } from './constants';
 import styles from './styles';
@@ -43,18 +43,7 @@ class BookDetail extends Component {
 }
 
 BookDetail.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.number,
-    author: PropTypes.string,
-    title: PropTypes.string,
-    genre: PropTypes.string,
-    publisher: PropTypes.string,
-    year: PropTypes.string,
-    image: PropTypes.shape({
-      url: PropTypes.string
-    }),
-    available: PropTypes.bool
-  })
+  item: bookPropType
 };
 
 export default BookDetail;

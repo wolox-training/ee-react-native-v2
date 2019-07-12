@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, Animated } from 'react-native';
 import PropTypes from 'prop-types';
 import defaultPlaceholder from '@assets/book_placeholder.png';
+import { bookPropType } from '@propTypes/books';
 
 import styles from './styles';
 
@@ -48,17 +49,7 @@ class Book extends Component {
 }
 
 Book.propTypes = {
-  item: PropTypes.shape({
-    author: PropTypes.string,
-    coverImg: PropTypes.shape({
-      url: PropTypes.string
-    }),
-    genre: PropTypes.string,
-    id: PropTypes.number,
-    publisher: PropTypes.string,
-    title: PropTypes.string,
-    year: PropTypes.string
-  }).isRequired,
+  item: bookPropType.isRequired,
   handleOnPress: PropTypes.func,
   index: PropTypes.number
 };
