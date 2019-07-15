@@ -10,8 +10,8 @@ class CustomTextInput extends Component {
   };
 
   onChange = value => {
-    const { onChange } = this.props;
-    this.setState({ value });
+    const { onChange, controlled } = this.props;
+    if (!controlled) this.setState({ value });
     if (onChange) onChange(value);
   };
 
@@ -23,15 +23,18 @@ class CustomTextInput extends Component {
       inputTextStyles,
       inputContainerStyles,
       placeholder,
-      secureTextEntry
+      secureTextEntry,
+      controlled,
+      value
     } = this.props;
-    const { value } = this.state;
+    const { value: valueState } = this.state;
+    const valueToRender = controlled ? value : valueState;
     return (
       <View style={[styles.container, viewStyles]}>
         {title && <Text style={[styles.title, titleStyles]}>{title}</Text>}
         <View style={[styles.inputContainer, inputContainerStyles]}>
           <TextInput
-            value={value}
+            value={valueToRender}
             style={[styles.input, inputTextStyles]}
             placeholder={placeholder}
             onChangeText={this.onChange}
@@ -52,13 +55,15 @@ CustomTextInput.propTypes = {
   inputContainerStyles: ViewPropTypes.style,
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
-  secureTextEntry: PropTypes.bool
+  secureTextEntry: PropTypes.bool,
+  controlled: PropTypes.bool
 };
 
 CustomTextInput.defaultProps = {
   value: '',
   placeholder: '',
-  secureTextEntry: false
+  secureTextEntry: false,
+  controlled: false
 };
 
 export default CustomTextInput;
