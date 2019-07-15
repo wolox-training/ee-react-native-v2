@@ -28,7 +28,15 @@ class LoginContainer extends Component {
       emailError: isValidEmail ? null : EMAIL_ERROR,
       passwordError: isValidPassword ? null : PASSWORD_ERROR
     });
-    return isValidEmail && isValidPassword && login(email, password);
+    return (
+      isValidEmail &&
+      isValidPassword &&
+      login(email, password) &&
+      this.setState({
+        email: '',
+        password: ''
+      })
+    );
   };
 
   render() {
