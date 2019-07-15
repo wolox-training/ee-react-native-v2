@@ -8,10 +8,12 @@ import headerImg from '@assets/bc_nav_bar.png';
 import EmptySearch from './components/EmptySearch';
 import styles from './styles';
 
-class SearchScreen extends Component {
-  keyExtractor = ({ id }) => id;
+const DECIMAL_BASE = 10;
 
-  renderItem = ({ item }) => <Book item={item} handleOnPress={this.props.goToDetails} />;
+class SearchScreen extends Component {
+  keyExtractor = ({ id }) => id.toString(DECIMAL_BASE);
+
+  renderItem = ({ item, index }) => <Book item={item} index={index} handleOnPress={this.props.goToDetails} />;
 
   render() {
     const { booksFiltered, onSearch, onClose, searchNotEmpty } = this.props;

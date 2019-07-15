@@ -28,11 +28,11 @@ class Book extends Component {
   onPress = () => this.props.handleOnPress(this.props.item);
 
   render() {
-    const { item } = this.props;
+    const { item, animated } = this.props;
     const { image: coverImg, title, author } = item;
     const { opacityAnim } = this.state;
     return (
-      <Animated.View style={{ opacity: opacityAnim }}>
+      <Animated.View style={{ opacity: animated ? opacityAnim : MAX_OPACITY }}>
         <TouchableOpacity style={styles.container} onPress={this.onPress}>
           <Image
             source={(coverImg && { uri: coverImg.url }) || defaultPlaceholder}
@@ -51,7 +51,12 @@ class Book extends Component {
 Book.propTypes = {
   item: bookPropType.isRequired,
   handleOnPress: PropTypes.func,
-  index: PropTypes.number
+  index: PropTypes.number,
+  animated: PropTypes.bool
+};
+
+Book.defaultProps = {
+  animated: false
 };
 
 export default Book;
