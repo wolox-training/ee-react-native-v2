@@ -4,6 +4,7 @@ import { createSelector } from 'reselect';
 import { View, Text, Image } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import PropTypes from 'prop-types';
+import { bookPropType } from '@propTypes/books';
 
 import BookVertical from './components/BookVertical';
 import profileImage from './assets/ninjaTurtle.jpg';
@@ -44,17 +45,7 @@ class ProfileScreen extends Component {
 }
 
 ProfileScreen.propTypes = {
-  lastViewedBooks: PropTypes.arrayOf(
-    PropTypes.shape({
-      author: PropTypes.string,
-      coverImg: PropTypes.string,
-      editor: PropTypes.string,
-      genre: PropTypes.string,
-      id: PropTypes.number,
-      title: PropTypes.string,
-      year: PropTypes.string
-    }).isRequired
-  )
+  lastViewedBooks: PropTypes.arrayOf(bookPropType)
 };
 
 const booksSelector = store => store.books.books;
