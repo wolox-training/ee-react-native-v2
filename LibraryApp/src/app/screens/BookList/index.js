@@ -11,6 +11,8 @@ import { bookPropType } from '@propTypes/books';
 
 import styles from './styles';
 
+const DECIMAL_BASE = 10;
+
 class BookList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -27,9 +29,11 @@ class BookList extends Component {
     );
   };
 
-  keyExtractor = ({ id }) => id;
+  keyExtractor = ({ id }) => id.toString(DECIMAL_BASE);
 
-  renderItem = ({ item, index }) => <Book item={item} index={index} handleOnPress={this.goToDetails} />;
+  renderItem = ({ item, index }) => (
+    <Book item={item} index={index} handleOnPress={this.goToDetails} animated />
+  );
 
   render() {
     const { books } = this.props;

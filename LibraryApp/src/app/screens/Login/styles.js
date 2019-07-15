@@ -15,6 +15,9 @@ const FOOTER_BOTTOM = 10;
 const ERROR_TOP = isIOS ? -20 : -10;
 
 export default StyleSheet.create({
+  keyboardAvoidingContainer: {
+    flex: 1
+  },
   container: {
     flex: 1,
     justifyContent: 'center',

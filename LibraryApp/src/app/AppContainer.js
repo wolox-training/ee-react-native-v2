@@ -7,7 +7,7 @@ import Routes from '@constants/routes';
 import { blackSqueeze, pictonBlue } from '@constants/colors';
 import BookList from '@screens/BookList';
 import BookDetails from '@screens/BookDetails';
-import EmptyScreen from '@screens/EmptyScreen';
+import ProfileScreen from '@screens/ProfileScreen';
 import Login from '@screens/Login';
 import SearchScreen from '@screens/SearchScreen';
 import LogoutButton from '@components/LogoutButton';
@@ -22,6 +22,26 @@ import settingsImgActive from './assets/ic_settings_active.png';
 import styles from './styles';
 
 const APP_TITLE = 'LIBRARY';
+const BOOK_DETAIL_LABEL = 'BOOK DETAIL';
+const PROFILE_TAB_LABEL = 'Profile';
+const PROFILE_LABEL = 'PROFILE';
+
+const stackNavigationOptions = {
+  defaultNavigationOptions: {
+    headerBackground: <Image source={headerImg} style={styles.headerImageStyles} />,
+    headerStyle: styles.headerStyles,
+    headerTitleStyle: styles.headerTitleStyles,
+    headerBackTitle: null,
+    headerTransparent: true,
+    headerBackImage: <Image source={backImg} style={styles.headerBackImgStyles} />,
+    headerRight: <LogoutButton />,
+    headerTitle: APP_TITLE
+  },
+  cardStyle: {
+    backgroundColor: blackSqueeze
+  },
+  headerLayoutPreset: 'center'
+};
 
 const BooksNavigator = createStackNavigator(
   {
@@ -31,7 +51,12 @@ const BooksNavigator = createStackNavigator(
         headerLeft: <SearchButton />
       }
     },
-    [Routes.BookDetails]: { screen: BookDetails },
+    [Routes.BookDetails]: {
+      screen: BookDetails,
+      navigationOptions: {
+        headerTitle: BOOK_DETAIL_LABEL
+      }
+    },
     [Routes.SearchScreen]: {
       screen: SearchScreen,
       navigationOptions: {
@@ -39,27 +64,29 @@ const BooksNavigator = createStackNavigator(
       }
     }
   },
+  stackNavigationOptions
+);
+
+const ProfileNavigator = createStackNavigator(
   {
-    defaultNavigationOptions: {
-      headerBackground: <Image source={headerImg} style={styles.headerImageStyles} />,
-      headerStyle: styles.headerStyles,
-      headerTitleStyle: styles.headerTitleStyles,
-      headerBackTitle: null,
-      headerTransparent: true,
-      headerBackImage: <Image source={backImg} style={styles.headerBackImgStyles} />,
-      headerRight: <LogoutButton />,
-      headerTitle: APP_TITLE
-    },
-    cardStyle: {
-      backgroundColor: blackSqueeze
-    },
-    headerLayoutPreset: 'center'
-  }
+    [Routes.ProfileScreen]: {
+      screen: ProfileScreen,
+      navigationOptions: {
+        headerTitle: PROFILE_LABEL
+      }
+    }
+  },
+  stackNavigationOptions
 );
 
 const tabNavigatorScreens = {
   [Routes.Library]: BooksNavigator,
-  [Routes.EmptyScreen]: EmptyScreen
+  [Routes.ProfileScreen]: {
+    screen: ProfileNavigator,
+    navigationOptions: {
+      tabBarLabel: PROFILE_TAB_LABEL
+    }
+  }
 };
 
 const defaultTabNavigationOptions = {
@@ -71,7 +98,7 @@ const defaultTabNavigationOptions = {
         case Routes.Library:
           tabIcon = <Image source={focused ? libraryImgActive : libraryImg} style={styles.tabIcon} />;
           break;
-        case Routes.EmptyScreen:
+        case Routes.ProfileScreen:
           tabIcon = <Image source={focused ? settingsImgActive : settingsImg} style={styles.tabIcon} />;
           break;
         default:
