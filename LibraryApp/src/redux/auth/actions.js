@@ -9,17 +9,19 @@ export const actions = {
   LOGOUT: 'LOGOUT',
   AUTH_INIT: 'AUTH_INIT',
   AUTH_INIT_SUCCESS: 'AUTH_INIT_SUCCESS',
-  AUTH_INIT_FAILURE: 'AUTH_INIT_FAILURE'
+  AUTH_INIT_FAILURE: 'AUTH_INIT_FAILURE',
+  SET_EMAIL: 'SET_EMAIL',
+  SET_PASSWORD: 'SET_PASSWORD'
 };
 
 const privateActionCreators = {
   loginSuccess: () => dispatch => {
-    dispatch({ type: actions.LOGIN_SUCCESS });
     dispatch(
       NavigationActions.navigate({
         routeName: Routes.Library
       })
     );
+    dispatch({ type: actions.LOGIN_SUCCESS });
   },
   loginFailure: problem => dispatch => {
     dispatch({
@@ -74,6 +76,18 @@ const actionCreators = {
       })
     );
     AuthService.logout();
+  },
+  setEmail: email => dispatch => {
+    dispatch({
+      type: actions.SET_EMAIL,
+      payload: email
+    });
+  },
+  setPassword: password => dispatch => {
+    dispatch({
+      type: actions.SET_PASSWORD,
+      payload: password
+    });
   }
 };
 

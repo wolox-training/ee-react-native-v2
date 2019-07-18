@@ -6,10 +6,13 @@ const initialState = {
   loading: false,
   logged: false,
   authError: null,
-  initialAuthLoading: false
+  initialAuthLoading: false,
+  email: '',
+  password: ''
 };
 
 const reducer = (state = immutable(initialState), action) => {
+  const { payload } = action;
   switch (action.type) {
     case actions.AUTH_INIT:
       return state.merge({
@@ -33,16 +36,26 @@ const reducer = (state = immutable(initialState), action) => {
     case actions.LOGIN_SUCCESS:
       return state.merge({
         logged: true,
-        loading: false
+        loading: false,
+        email: '',
+        password: ''
       });
     case actions.LOGIN_FAILURE:
       return state.merge({
         logged: false,
         loading: false,
-        authError: action.payload
+        authError: payload
       });
     case actions.LOGOUT:
       return state.merge({ ...initialState });
+    case actions.SET_EMAIL:
+      return state.merge({
+        email: payload
+      });
+    case actions.SET_PASSWORD:
+      return state.merge({
+        password: payload
+      });
     default:
       return state;
   }

@@ -10,44 +10,34 @@ import { EMAIL_ERROR, PASSWORD_ERROR } from './constants';
 
 class LoginContainer extends Component {
   state = {
-    email: '',
-    password: '',
     emailError: null,
     passwordError: null
   };
 
-  onEmailChange = email => this.setState({ email });
+  onEmailChange = email => this.props.setEmail(email);
 
-  onPasswordChange = password => this.setState({ password });
+  onPasswordChange = password => this.props.setPassword(password);
 
   handleSubmit = () => {
-    const { login } = this.props;
-    const { email, password } = this.state;
+    const { login, email, password } = this.props;
+
     const isValidEmail = isEmailValid(email);
     const isValidPassword = isPasswordValid(password);
     this.setState({
       emailError: isValidEmail ? null : EMAIL_ERROR,
       passwordError: isValidPassword ? null : PASSWORD_ERROR
     });
-    return (
-      isValidEmail &&
-      isValidPassword &&
-      login(email, password) &&
-      this.setState({
-        email: '',
-        password: ''
-      })
-    );
+    return isValidEmail && isValidPassword && login(email, password);
   };
 
   render() {
-    const { email, password, emailError, passwordError } = this.state;
-    const { authError } = this.props;
+    const { emailError, passwordError } = this.state;
+    const { authError, email, password } = this.props;
     return (
       <Login
         email={email}
         password={password}
-        onSubmit={this.handleSubmit}
+        handleSubmit={this.handleSubmit}
         onEmailChange={this.onEmailChange}
         onPasswordChange={this.onPasswordChange}
         emailError={emailError}
@@ -63,16 +53,24 @@ LoginContainer.propTypes = {
     dispatch: PropTypes.func
   }),
   login: PropTypes.func,
-  authError: PropTypes.string
+  authError: PropTypes.string,
+  email: PropTypes.string,
+  password: PropTypes.string,
+  setEmail: PropTypes.func,
+  setPassword: PropTypes.func
 };
 
 const mapStateToProps = store => ({
   authError: store.auth.authError,
-  loading: store.auth.initialAuthLoading
+  loading: store.auth.initialAuthLoading,
+  email: store.auth.email,
+  password: store.auth.password
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: (email, password) => dispatch(authActions.login(email, password))
+  login: (email, password) => dispatch(authActions.login(email, password)),
+  setEmail: email => dispatch(authActions.setEmail(email)),
+  setPassword: password => dispatch(authActions.setPassword(password))
 });
 
 const LoginWithLoading = withLoading(LoginContainer);

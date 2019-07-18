@@ -19,7 +19,7 @@ import {
 class Login extends Component {
   render() {
     const {
-      onSubmit,
+      handleSubmit,
       onPasswordChange,
       onEmailChange,
       emailError,
@@ -59,7 +59,7 @@ class Login extends Component {
             title={SUBMIT_TEXT}
             buttonStyles={styles.buttonStyle}
             textStyles={styles.buttonTextStyle}
-            onPress={onSubmit}
+            onPress={handleSubmit}
           />
           {!!authError && <Text style={styles.errorTextGeneral}>{authError}</Text>}
           <Text style={styles.footerText}>{FOOTER_TEXT}</Text>
@@ -70,7 +70,7 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   onPasswordChange: PropTypes.func.isRequired,
   onEmailChange: PropTypes.func.isRequired,
   emailError: PropTypes.string,
