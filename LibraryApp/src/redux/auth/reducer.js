@@ -5,15 +5,25 @@ import { actions } from './actions';
 const initialState = {
   loading: false,
   logged: false,
-  authError: null
+  authError: null,
+  initialAuthLoading: false
 };
 
 const reducer = (state = immutable(initialState), action) => {
   switch (action.type) {
-    case actions.INIT_STORED_USER:
+    case actions.AUTH_INIT:
+      return state.merge({
+        initialAuthLoading: true
+      });
+    case actions.AUTH_INIT_SUCCESS:
       return state.merge({
         loading: false,
-        logged: true
+        logged: true,
+        initialAuthLoading: false
+      });
+    case actions.AUTH_INIT_FAILURE:
+      return state.merge({
+        initialAuthLoading: false
       });
     case actions.LOGIN_REQUEST:
       return state.merge({

@@ -7,7 +7,9 @@ export const actions = {
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
   LOGIN_FAILURE: 'LOGIN_FAILURE',
   LOGOUT: 'LOGOUT',
-  AUTH_INIT: 'AUTH_INIT'
+  AUTH_INIT: 'AUTH_INIT',
+  AUTH_INIT_SUCCESS: 'AUTH_INIT_SUCCESS',
+  AUTH_INIT_FAILURE: 'AUTH_INIT_FAILURE'
 };
 
 const privateActionCreators = {
@@ -26,8 +28,10 @@ const privateActionCreators = {
     });
   },
   initWithStoredUser: () => async dispatch => {
+    dispatch({ type: actions.AUTH_INIT });
     const tokens = await AuthService.getCurrentUser();
     if (!tokens.authenticated) {
+      dispatch({ type: actions.AUTH_INIT_FAILURE });
       dispatch(
         NavigationActions.navigate({
           routeName: Routes.Login
@@ -35,12 +39,12 @@ const privateActionCreators = {
       );
     } else {
       await AuthService.setCurrentUser(tokens.headers);
-      dispatch({ type: actions.AUTH_INIT });
       dispatch(
         NavigationActions.navigate({
           routeName: Routes.Library
         })
       );
+      dispatch({ type: actions.AUTH_INIT_SUCCESS });
     }
   }
 };
