@@ -7,22 +7,25 @@ import { bookPropType } from '@propTypes/books';
 import styles from './styles';
 
 const MAX_OPACITY = 1;
-const MAX_INDEX = 9;
-const MAX_BOOKS = 10;
-const ANIM_DURATION = 2000;
+const ANIM_DURATION = 100;
+const BASE_DELAY = 100;
 
 class Book extends Component {
   state = {
-    opacityAnim: new Animated.Value(0)
+    opacityAnim: new Animated.Value(0),
+    loading: true
   };
 
   componentDidMount() {
     const { index } = this.props;
-    const maxOpacity = MAX_OPACITY - (MAX_INDEX - index) / MAX_BOOKS;
-    Animated.timing(this.state.opacityAnim, {
-      toValue: maxOpacity,
-      duration: ANIM_DURATION
-    }).start();
+    const delayTime = BASE_DELAY * (index + 1);
+    setTimeout(() => {
+      this.setState({ loading: false });
+      Animated.timing(this.state.opacityAnim, {
+        toValue: MAX_OPACITY,
+        duration: ANIM_DURATION
+      }).start();
+    }, delayTime);
   }
 
   onPress = () => this.props.handleOnPress(this.props.item);
@@ -30,7 +33,8 @@ class Book extends Component {
   render() {
     const { item, animated } = this.props;
     const { image: coverImg, title, author } = item;
-    const { opacityAnim } = this.state;
+    const { opacityAnim, loading } = this.state;
+    if (loading) return null;
     return (
       <Animated.View style={{ opacity: animated ? opacityAnim : MAX_OPACITY }}>
         <TouchableOpacity style={styles.container} onPress={this.onPress}>
