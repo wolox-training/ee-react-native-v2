@@ -32,7 +32,7 @@ class LoginContainer extends Component {
 
   render() {
     const { emailError, passwordError } = this.state;
-    const { authError, email, password } = this.props;
+    const { authError, email, password, loginLoading } = this.props;
     return (
       <Login
         email={email}
@@ -43,6 +43,7 @@ class LoginContainer extends Component {
         emailError={emailError}
         passwordError={passwordError}
         authError={authError}
+        loading={loginLoading}
       />
     );
   }
@@ -57,14 +58,16 @@ LoginContainer.propTypes = {
   email: PropTypes.string,
   password: PropTypes.string,
   setEmail: PropTypes.func,
-  setPassword: PropTypes.func
+  setPassword: PropTypes.func,
+  loginLoading: PropTypes.bool
 };
 
 const mapStateToProps = store => ({
   authError: store.auth.authError,
   loading: store.auth.initialAuthLoading,
   email: store.auth.email,
-  password: store.auth.password
+  password: store.auth.password,
+  loginLoading: store.auth.loading
 });
 
 const mapDispatchToProps = dispatch => ({

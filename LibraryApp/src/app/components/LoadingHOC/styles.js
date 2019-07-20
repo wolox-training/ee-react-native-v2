@@ -4,5 +4,8 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     alignSelf: 'center'
+  },
+  notFlex: {
+    flex: 0
   }
 });

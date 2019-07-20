@@ -28,7 +28,7 @@ const reducer = (state = immutable(initialState), action) => {
       return state.merge({
         initialAuthLoading: false
       });
-    case actions.LOGIN_REQUEST:
+    case actions.LOGIN:
       return state.merge({
         loading: true,
         authError: null

@@ -26,7 +26,8 @@ class Login extends Component {
       passwordError,
       authError,
       email,
-      password
+      password,
+      loading
     } = this.props;
     return (
       <KeyboardAvoidingView behavior="height" style={styles.keyboardAvoidingContainer}>
@@ -60,6 +61,8 @@ class Login extends Component {
             buttonStyles={styles.buttonStyle}
             textStyles={styles.buttonTextStyle}
             onPress={handleSubmit}
+            loading={loading}
+            notFlex
           />
           {!!authError && <Text style={styles.errorTextGeneral}>{authError}</Text>}
           <Text style={styles.footerText}>{FOOTER_TEXT}</Text>
@@ -77,7 +80,8 @@ Login.propTypes = {
   passwordError: PropTypes.string,
   authError: PropTypes.string,
   email: PropTypes.string,
-  password: PropTypes.string
+  password: PropTypes.string,
+  loading: PropTypes.bool
 };
 
 export default Login;

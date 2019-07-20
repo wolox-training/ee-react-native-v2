@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { transparent } from '@constants/colors';
 import { DEFAULT_BUTTON_WIDTH } from '@constants/dimensions';
 import TouchableGradient from '@components/TouchableGradient';
+import withLoading from '@components/LoadingHOC';
 
 import styles from './styles';
 
@@ -85,4 +86,6 @@ CustomButton.defaultProps = {
   color: transparent
 };
 
-export default CustomButton;
+const CustomButtonWithLoading = withLoading(CustomButton);
+
+export default CustomButtonWithLoading;
