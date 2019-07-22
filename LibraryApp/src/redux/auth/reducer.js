@@ -48,14 +48,6 @@ const reducer = (state = immutable(initialState), action) => {
       });
     case actions.LOGOUT:
       return state.merge({ ...initialState });
-    case actions.SET_EMAIL:
-      return state.merge({
-        email: payload
-      });
-    case actions.SET_PASSWORD:
-      return state.merge({
-        password: payload
-      });
     default:
       return state;
   }
