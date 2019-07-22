@@ -29,15 +29,13 @@ class LoginContainer extends Component {
 
   render() {
     const { emailError, passwordError } = this.state;
-    const { authError } = this.props;
+    const { loginError } = this.props;
     return (
       <Login
         onSubmit={this.handleSubmit}
-        onEmailChange={this.onEmailChange}
-        onPasswordChange={this.onPasswordChange}
         emailError={emailError}
         passwordError={passwordError}
-        authError={authError}
+        loginError={loginError}
       />
     );
   }
@@ -48,11 +46,11 @@ LoginContainer.propTypes = {
     dispatch: PropTypes.func
   }),
   login: PropTypes.func,
-  authError: PropTypes.string
+  loginError: PropTypes.string
 };
 
 const mapStateToProps = store => ({
-  authError: store.auth.authError,
+  loginError: store.auth.loginError,
   loading: store.auth.initialAuthLoading
 });
 
