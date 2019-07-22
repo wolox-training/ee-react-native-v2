@@ -62,7 +62,6 @@ class Login extends Component {
             textStyles={styles.buttonTextStyle}
             onPress={handleSubmit}
             loading={loading}
-            notFlex
           />
           {!!authError && <Text style={styles.errorTextGeneral}>{authError}</Text>}
           <Text style={styles.footerText}>{FOOTER_TEXT}</Text>
@@ -81,7 +80,7 @@ Login.propTypes = {
   authError: PropTypes.string,
   email: PropTypes.string,
   password: PropTypes.string,
-  loading: PropTypes.bool
+  loading: PropTypes.bool.isRequired
 };
 
 export default Login;

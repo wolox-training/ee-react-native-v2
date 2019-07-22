@@ -8,6 +8,8 @@ import withLoading from '@components/LoadingHOC';
 import Login from './layout';
 import { EMAIL_ERROR, PASSWORD_ERROR } from './constants';
 
+const FLEX = 1;
+
 class LoginContainer extends Component {
   state = {
     emailError: null,
@@ -76,7 +78,7 @@ const mapDispatchToProps = dispatch => ({
   setPassword: password => dispatch(authActions.setPassword(password))
 });
 
-const LoginWithLoading = withLoading(LoginContainer);
+const LoginWithLoading = withLoading(LoginContainer, FLEX);
 
 export default connect(
   mapStateToProps,

@@ -12,6 +12,7 @@ import { bookPropType } from '@propTypes/books';
 import styles from './styles';
 
 const DECIMAL_BASE = 10;
+const FLEX = 1;
 
 class BookList extends Component {
   componentDidMount() {
@@ -60,6 +61,6 @@ const mapStateToProps = store => ({
   books: store.books.books
 });
 
-const BookListWithLoading = withLoading(BookList);
+const BookListWithLoading = withLoading(BookList, FLEX);
 
 export default connect(mapStateToProps)(BookListWithLoading);
