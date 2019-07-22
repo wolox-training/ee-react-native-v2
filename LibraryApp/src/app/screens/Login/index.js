@@ -6,7 +6,7 @@ import authActions from '@redux/auth/actions';
 import withLoading from '@components/LoadingHOC';
 
 import Login from './layout';
-import { EMAIL_ERROR, PASSWORD_ERROR } from './constants';
+import { EMAIL_ERROR, PASSWORD_ERROR, EMAIL_FIELD, PASSWORD_FIELD } from './constants';
 
 class LoginContainer extends Component {
   state = {
@@ -14,13 +14,10 @@ class LoginContainer extends Component {
     passwordError: null
   };
 
-  onEmailChange = email => this.props.setEmail(email);
-
-  onPasswordChange = password => this.props.setPassword(password);
-
-  handleSubmit = () => {
-    const { login, email, password } = this.props;
-
+  handleSubmit = values => {
+    const { login } = this.props;
+    const email = values[EMAIL_FIELD];
+    const password = values[PASSWORD_FIELD];
     const isValidEmail = isEmailValid(email);
     const isValidPassword = isPasswordValid(password);
     this.setState({
@@ -32,12 +29,10 @@ class LoginContainer extends Component {
 
   render() {
     const { emailError, passwordError } = this.state;
-    const { authError, email, password } = this.props;
+    const { authError } = this.props;
     return (
       <Login
-        email={email}
-        password={password}
-        handleSubmit={this.handleSubmit}
+        onSubmit={this.handleSubmit}
         onEmailChange={this.onEmailChange}
         onPasswordChange={this.onPasswordChange}
         emailError={emailError}
@@ -53,24 +48,16 @@ LoginContainer.propTypes = {
     dispatch: PropTypes.func
   }),
   login: PropTypes.func,
-  authError: PropTypes.string,
-  email: PropTypes.string,
-  password: PropTypes.string,
-  setEmail: PropTypes.func,
-  setPassword: PropTypes.func
+  authError: PropTypes.string
 };
 
 const mapStateToProps = store => ({
   authError: store.auth.authError,
-  loading: store.auth.initialAuthLoading,
-  email: store.auth.email,
-  password: store.auth.password
+  loading: store.auth.initialAuthLoading
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: (email, password) => dispatch(authActions.login(email, password)),
-  setEmail: email => dispatch(authActions.setEmail(email)),
-  setPassword: password => dispatch(authActions.setPassword(password))
+  login: (email, password) => dispatch(authActions.login(email, password))
 });
 
 const LoginWithLoading = withLoading(LoginContainer);
