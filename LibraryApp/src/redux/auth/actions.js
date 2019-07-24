@@ -3,12 +3,17 @@ import { NavigationActions } from 'react-navigation';
 import { createTypes, completeTypes, withSuccess, withPostFailure } from 'redux-recompose';
 import Routes from '@constants/routes';
 
+const targets = {
+  INITIAL_AUTH: 'initialAuth',
+  LOGIN: 'login'
+};
+
 export const actions = createTypes(completeTypes(['LOGIN', 'AUTH_INIT'], ['LOGOUT']), '@@AUTH');
 
 const actionCreators = {
   initialLoading: () => ({
     type: actions.AUTH_INIT,
-    target: 'initialAuth',
+    target: targets.INITIAL_AUTH,
     service: AuthService.getCurrentUser,
     injections: [
       withSuccess(async (dispatch, response) => {
@@ -18,7 +23,7 @@ const actionCreators = {
             routeName: Routes.Library
           })
         );
-        dispatch({ type: actions.AUTH_INIT_SUCCESS });
+        dispatch({ type: actions.AUTH_INIT_SUCCESS, target: targets.INITIAL_AUTH });
       }),
       withPostFailure(dispatch => {
         dispatch(
@@ -31,7 +36,7 @@ const actionCreators = {
   }),
   login: (email, password) => ({
     type: actions.LOGIN,
-    target: 'login',
+    target: targets.LOGIN,
     service: AuthService.login,
     payload: { email, password },
     injections: [
@@ -45,7 +50,7 @@ const actionCreators = {
             routeName: Routes.Library
           })
         );
-        dispatch({ type: actions.LOGIN_SUCCESS });
+        dispatch({ type: actions.LOGIN_SUCCESS, target: targets.LOGIN });
       })
     ]
   }),

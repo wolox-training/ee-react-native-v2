@@ -6,7 +6,7 @@ import styles from './styles';
 
 class CustomTextInput extends Component {
   state = {
-    value: this.props.value || (this.props.input && this.props.input.value)
+    value: ''
   };
 
   onChange = value => {
