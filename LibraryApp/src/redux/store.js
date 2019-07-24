@@ -5,6 +5,7 @@ import {
   createNavigationReducer
 } from 'react-navigation-redux-helpers';
 import { fetchMiddleware, configureMergeState } from 'redux-recompose';
+import { reducer as formReducer } from 'redux-form';
 import authReducer from '@redux/auth/reducer';
 import booksReducer from '@redux/books/reducer';
 import { RootNavigator } from '@app/AppContainer';
@@ -18,7 +19,8 @@ configureMergeState((state, diff) => state.merge(diff));
 const reducers = {
   auth: authReducer,
   books: booksReducer,
-  nav
+  nav,
+  form: formReducer
 };
 
 const reducer = combineReducers(reducers);

@@ -28,10 +28,10 @@ export const getCurrentUser = async () => {
   };
   return {
     headers,
-    authenticated: headers.token && headers.client && headers.uid
+    ok: headers.token && headers.client && headers.uid
   };
 };
 
-export const login = (email, password) => api.post(LOGIN_ENDPOINT, { email, password });
+export const login = ({ email, password }) => api.post(LOGIN_ENDPOINT, { email, password });
 
 export const logout = () => AsyncStorage.multiRemove([TOKEN_STORAGE, UID_STORAGE, CLIENT_STORAGE]);

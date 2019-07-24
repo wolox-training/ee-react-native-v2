@@ -6,53 +6,36 @@ import authActions from '@redux/auth/actions';
 import withLoading from '@components/LoadingHOC';
 
 import Login from './layout';
-import { EMAIL_ERROR, PASSWORD_ERROR } from './constants';
+import { EMAIL_ERROR, PASSWORD_ERROR, EMAIL_FIELD, PASSWORD_FIELD } from './constants';
 
 class LoginContainer extends Component {
   state = {
-    email: '',
-    password: '',
     emailError: null,
     passwordError: null
   };
 
-  onEmailChange = email => this.setState({ email });
-
-  onPasswordChange = password => this.setState({ password });
-
-  handleSubmit = () => {
+  handleSubmit = values => {
     const { login } = this.props;
-    const { email, password } = this.state;
+    const email = values[EMAIL_FIELD];
+    const password = values[PASSWORD_FIELD];
     const isValidEmail = isEmailValid(email);
     const isValidPassword = isPasswordValid(password);
     this.setState({
       emailError: isValidEmail ? null : EMAIL_ERROR,
       passwordError: isValidPassword ? null : PASSWORD_ERROR
     });
-    return (
-      isValidEmail &&
-      isValidPassword &&
-      login(email, password) &&
-      this.setState({
-        email: '',
-        password: ''
-      })
-    );
+    return isValidEmail && isValidPassword && login(email, password);
   };
 
   render() {
-    const { email, password, emailError, passwordError } = this.state;
-    const { authError } = this.props;
+    const { emailError, passwordError } = this.state;
+    const { loginError } = this.props;
     return (
       <Login
-        email={email}
-        password={password}
         onSubmit={this.handleSubmit}
-        onEmailChange={this.onEmailChange}
-        onPasswordChange={this.onPasswordChange}
         emailError={emailError}
         passwordError={passwordError}
-        authError={authError}
+        loginError={loginError}
       />
     );
   }
@@ -63,11 +46,11 @@ LoginContainer.propTypes = {
     dispatch: PropTypes.func
   }),
   login: PropTypes.func,
-  authError: PropTypes.string
+  loginError: PropTypes.string
 };
 
 const mapStateToProps = store => ({
-  authError: store.auth.authError,
+  loginError: store.auth.loginError,
   loading: store.auth.initialAuthLoading
 });
 

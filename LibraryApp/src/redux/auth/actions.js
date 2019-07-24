@@ -1,71 +1,59 @@
 import * as AuthService from '@services/AuthService';
 import { NavigationActions } from 'react-navigation';
+import { createTypes, completeTypes, withSuccess, withPostFailure } from 'redux-recompose';
 import Routes from '@constants/routes';
 
-export const actions = {
-  LOGIN: 'LOGIN',
-  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-  LOGIN_FAILURE: 'LOGIN_FAILURE',
-  LOGOUT: 'LOGOUT',
-  AUTH_INIT: 'AUTH_INIT',
-  AUTH_INIT_SUCCESS: 'AUTH_INIT_SUCCESS',
-  AUTH_INIT_FAILURE: 'AUTH_INIT_FAILURE'
+const targets = {
+  INITIAL_AUTH: 'initialAuth',
+  LOGIN: 'login'
 };
 
-const privateActionCreators = {
-  loginSuccess: () => dispatch => {
-    dispatch({ type: actions.LOGIN_SUCCESS });
-    dispatch(
-      NavigationActions.navigate({
-        routeName: Routes.Library
-      })
-    );
-  },
-  loginFailure: problem => dispatch => {
-    dispatch({
-      type: actions.LOGIN_FAILURE,
-      payload: problem
-    });
-  },
-  initWithStoredUser: () => async dispatch => {
-    dispatch({ type: actions.AUTH_INIT });
-    const tokens = await AuthService.getCurrentUser();
-    if (!tokens.authenticated) {
-      dispatch({ type: actions.AUTH_INIT_FAILURE });
-      dispatch(
-        NavigationActions.navigate({
-          routeName: Routes.Login
-        })
-      );
-    } else {
-      await AuthService.setCurrentUser(tokens.headers);
-      dispatch(
-        NavigationActions.navigate({
-          routeName: Routes.Library
-        })
-      );
-      dispatch({ type: actions.AUTH_INIT_SUCCESS });
-    }
-  }
-};
+export const actions = createTypes(completeTypes(['LOGIN', 'AUTH_INIT'], ['LOGOUT']), '@@AUTH');
 
 const actionCreators = {
-  initialLoading: () => dispatch => {
-    dispatch(privateActionCreators.initWithStoredUser());
-  },
-  login: (email, password) => async dispatch => {
-    dispatch({ type: actions.LOGIN });
-    const response = await AuthService.login(email, password);
-    if (response.ok) {
-      const { headers } = response;
-      const token = headers['access-token'];
-      const { client, uid } = headers;
-      await AuthService.setCurrentUser({ token, client, uid });
-      dispatch(privateActionCreators.loginSuccess());
-    } else {
-      dispatch(privateActionCreators.loginFailure(response.problem));
-    }
-  },
+  initialLoading: () => ({
+    type: actions.AUTH_INIT,
+    target: targets.INITIAL_AUTH,
+    service: AuthService.getCurrentUser,
+    injections: [
+      withSuccess(async (dispatch, response) => {
+        await AuthService.setCurrentUser(response.headers);
+        dispatch(
+          NavigationActions.navigate({
+            routeName: Routes.Library
+          })
+        );
+        dispatch({ type: actions.AUTH_INIT_SUCCESS, target: targets.INITIAL_AUTH });
+      }),
+      withPostFailure(dispatch => {
+        dispatch(
+          NavigationActions.navigate({
+            routeName: Routes.Login
+          })
+        );
+      })
+    ]
+  }),
+  login: (email, password) => ({
+    type: actions.LOGIN,
+    target: targets.LOGIN,
+    service: AuthService.login,
+    payload: { email, password },
+    injections: [
+      withSuccess(async (dispatch, response) => {
+        const { headers } = response;
+        const token = headers['access-token'];
+        const { client, uid } = headers;
+        await AuthService.setCurrentUser({ token, client, uid });
+        dispatch(
+          NavigationActions.navigate({
+            routeName: Routes.Library
+          })
+        );
+        dispatch({ type: actions.LOGIN_SUCCESS, target: targets.LOGIN });
+      })
+    ]
+  }),
   logout: () => dispatch => {
     dispatch({ type: actions.LOGOUT });
     dispatch(

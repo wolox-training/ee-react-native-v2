@@ -1,51 +1,20 @@
 import immutable from 'seamless-immutable';
+import { createReducer, completeReducer, completeState } from 'redux-recompose';
 
 import { actions } from './actions';
 
-const initialState = {
-  loading: false,
-  logged: false,
-  authError: null,
-  initialAuthLoading: false
+const stateDescription = {
+  login: null,
+  initialAuth: null
 };
 
-const reducer = (state = immutable(initialState), action) => {
-  switch (action.type) {
-    case actions.AUTH_INIT:
-      return state.merge({
-        initialAuthLoading: true
-      });
-    case actions.AUTH_INIT_SUCCESS:
-      return state.merge({
-        loading: false,
-        logged: true,
-        initialAuthLoading: false
-      });
-    case actions.AUTH_INIT_FAILURE:
-      return state.merge({
-        initialAuthLoading: false
-      });
-    case actions.LOGIN_REQUEST:
-      return state.merge({
-        loading: true,
-        authError: null
-      });
-    case actions.LOGIN_SUCCESS:
-      return state.merge({
-        logged: true,
-        loading: false
-      });
-    case actions.LOGIN_FAILURE:
-      return state.merge({
-        logged: false,
-        loading: false,
-        authError: action.payload
-      });
-    case actions.LOGOUT:
-      return state.merge({ ...initialState });
-    default:
-      return state;
+const initialState = completeState(stateDescription);
+
+const reducerDescription = {
+  primaryActions: [actions.LOGIN, actions.AUTH_INIT],
+  override: {
+    [actions.LOGOUT]: state => state.merge({ ...initialState })
   }
 };
 
-export default reducer;
+export default createReducer(immutable(initialState), completeReducer(reducerDescription));

@@ -6,13 +6,14 @@ import styles from './styles';
 
 class CustomTextInput extends Component {
   state = {
-    value: this.props.value
+    value: ''
   };
 
   onChange = value => {
-    const { onChange, controlled } = this.props;
+    const { onChange, controlled, input } = this.props;
     if (!controlled) this.setState({ value });
     if (onChange) onChange(value);
+    if (input) input.onChange(value);
   };
 
   render() {
@@ -25,10 +26,12 @@ class CustomTextInput extends Component {
       placeholder,
       secureTextEntry,
       controlled,
-      value
+      value,
+      input
     } = this.props;
     const { value: valueState } = this.state;
-    const valueToRender = controlled ? value : valueState;
+    const valueProp = value || (input && input.value);
+    const valueToRender = controlled ? valueProp : valueState;
     return (
       <View style={[styles.container, viewStyles]}>
         {title && <Text style={[styles.title, titleStyles]}>{title}</Text>}
@@ -56,7 +59,11 @@ CustomTextInput.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   secureTextEntry: PropTypes.bool,
-  controlled: PropTypes.bool
+  controlled: PropTypes.bool,
+  input: PropTypes.shape({
+    onChange: PropTypes.func,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  })
 };
 
 CustomTextInput.defaultProps = {

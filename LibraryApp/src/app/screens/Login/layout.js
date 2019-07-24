@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ImageBackground, Image, Text, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
+import { Field, reduxForm } from 'redux-form';
 import CustomButton from '@components/CustomButton';
 import CustomTextInput from '@components/CustomTextInput';
 import backgroundImg from '@assets/bc_inicio.png';
@@ -13,55 +14,46 @@ import {
   PASSWORD,
   PASSWORD_PLACEHOLDER,
   SUBMIT_TEXT,
-  FOOTER_TEXT
+  FOOTER_TEXT,
+  EMAIL_FIELD,
+  PASSWORD_FIELD
 } from './constants';
 
 class Login extends Component {
   render() {
-    const {
-      onSubmit,
-      onPasswordChange,
-      onEmailChange,
-      emailError,
-      passwordError,
-      authError,
-      email,
-      password
-    } = this.props;
+    const { handleSubmit, emailError, passwordError, loginError } = this.props;
     return (
       <KeyboardAvoidingView behavior="height" style={styles.keyboardAvoidingContainer}>
         <ImageBackground source={backgroundImg} style={styles.container}>
           <Image source={logo} style={styles.logo} />
-          <CustomTextInput
+          <Field
+            component={CustomTextInput}
+            name={EMAIL_FIELD}
             title={EMAIL}
             placeholder={EMAIL_PLACEHOLDER}
             viewStyles={styles.inputStyle}
             titleStyles={styles.titleStyle}
             inputTextStyles={styles.inputTextStyle}
-            onChange={onEmailChange}
-            value={email}
-            controlled
           />
           {emailError && <Text style={styles.errorText}>{emailError}</Text>}
-          <CustomTextInput
+          <Field
+            component={CustomTextInput}
+            name={PASSWORD_FIELD}
             title={PASSWORD}
             placeholder={PASSWORD_PLACEHOLDER}
             viewStyles={styles.inputStyle}
             titleStyles={styles.titleStyle}
             inputTextStyles={styles.inputTextStyle}
-            onChange={onPasswordChange}
             secureTextEntry
-            value={password}
-            controlled
           />
           {passwordError && <Text style={styles.errorText}>{passwordError}</Text>}
           <CustomButton
             title={SUBMIT_TEXT}
             buttonStyles={styles.buttonStyle}
             textStyles={styles.buttonTextStyle}
-            onPress={onSubmit}
+            onPress={handleSubmit}
           />
-          {!!authError && <Text style={styles.errorTextGeneral}>{authError}</Text>}
+          {!!loginError && <Text style={styles.errorTextGeneral}>{loginError}</Text>}
           <Text style={styles.footerText}>{FOOTER_TEXT}</Text>
         </ImageBackground>
       </KeyboardAvoidingView>
@@ -70,14 +62,12 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  onPasswordChange: PropTypes.func.isRequired,
-  onEmailChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   emailError: PropTypes.string,
   passwordError: PropTypes.string,
-  authError: PropTypes.string,
-  email: PropTypes.string,
-  password: PropTypes.string
+  loginError: PropTypes.string
 };
 
-export default Login;
+export default reduxForm({
+  form: 'login'
+})(Login);
