@@ -8,7 +8,12 @@ describe('02 - async', () => {
   it('getData resolves the data if true is sent as argument (avoid async/await)', () => {
     getData(true).then(data => { expect(data).toEqual('data'); });
   });
-  xit('getData throws error if false is sent as argument (use async/await)', async () => {
+  it('getData throws error if false is sent as argument (use async/await)', async () => {
+    try {
+      await getData(false);
+    } catch (err) {
+      expect(err).toEqual(new Error('error'));
+    }
   });
   xit('getData throws error if false is sent as argument (avoid async/await)', () => {
   });
