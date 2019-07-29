@@ -5,7 +5,8 @@ describe('02 - async', () => {
     const data = await getData(true);
     expect(data).toEqual('data');
   });
-  xit('getData resolves the data if true is sent as argument (avoid async/await)', () => {
+  it('getData resolves the data if true is sent as argument (avoid async/await)', () => {
+    getData(true).then(data => { expect(data).toEqual('data'); });
   });
   xit('getData throws error if false is sent as argument (use async/await)', async () => {
   });
