@@ -8,6 +8,8 @@ import withLoading from '@components/LoadingHOC';
 import Login from './layout';
 import { EMAIL_ERROR, PASSWORD_ERROR, EMAIL_FIELD, PASSWORD_FIELD } from './constants';
 
+const FLEX = 1;
+
 class LoginContainer extends Component {
   state = {
     emailError: null,
@@ -29,12 +31,13 @@ class LoginContainer extends Component {
 
   render() {
     const { emailError, passwordError } = this.state;
-    const { loginError } = this.props;
+    const { loginError, loginLoading } = this.props;
     return (
       <Login
         onSubmit={this.handleSubmit}
         emailError={emailError}
         passwordError={passwordError}
+        loading={loginLoading}
         loginError={loginError}
       />
     );
@@ -46,19 +49,21 @@ LoginContainer.propTypes = {
     dispatch: PropTypes.func
   }),
   login: PropTypes.func,
-  loginError: PropTypes.string
+  loginError: PropTypes.string,
+  loginLoading: PropTypes.bool
 };
 
 const mapStateToProps = store => ({
   loginError: store.auth.loginError,
-  loading: store.auth.initialAuthLoading
+  loading: store.auth.initialAuthLoading,
+  loginLoading: store.auth.loginLoading
 });
 
 const mapDispatchToProps = dispatch => ({
   login: (email, password) => dispatch(authActions.login(email, password))
 });
 
-const LoginWithLoading = withLoading(LoginContainer);
+const LoginWithLoading = withLoading(LoginContainer, FLEX);
 
 export default connect(
   mapStateToProps,

@@ -21,7 +21,7 @@ import {
 
 class Login extends Component {
   render() {
-    const { handleSubmit, emailError, passwordError, loginError } = this.props;
+    const { handleSubmit, emailError, passwordError, loginError, loading } = this.props;
     return (
       <KeyboardAvoidingView behavior="height" style={styles.keyboardAvoidingContainer}>
         <ImageBackground source={backgroundImg} style={styles.container}>
@@ -52,6 +52,7 @@ class Login extends Component {
             buttonStyles={styles.buttonStyle}
             textStyles={styles.buttonTextStyle}
             onPress={handleSubmit}
+            loading={loading}
           />
           {!!loginError && <Text style={styles.errorTextGeneral}>{loginError}</Text>}
           <Text style={styles.footerText}>{FOOTER_TEXT}</Text>
@@ -65,7 +66,8 @@ Login.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   emailError: PropTypes.string,
   passwordError: PropTypes.string,
-  loginError: PropTypes.string
+  loginError: PropTypes.string,
+  loading: PropTypes.bool.isRequired
 };
 
 export default reduxForm({
