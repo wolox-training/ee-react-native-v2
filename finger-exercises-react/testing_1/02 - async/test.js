@@ -15,6 +15,7 @@ describe('02 - async', () => {
       expect(err).toEqual(new Error('error'));
     }
   });
-  xit('getData throws error if false is sent as argument (avoid async/await)', () => {
+  it('getData throws error if false is sent as argument (avoid async/await)', () => {
+    getData(false).catch(err => { expect(err).toEqual(new Error('error')); });
   });
 });
