@@ -14,7 +14,8 @@ describe('App', () => {
     expect(wrapper.find(Dashboard)).toHaveLength(1);
   });
 
-  xit('matches the snapshot', () => {
+  it('matches the snapshot', () => {
     const tree = mount(<App />);
+    expect(toJson(tree)).toMatchSnapshot();
   });
 });
