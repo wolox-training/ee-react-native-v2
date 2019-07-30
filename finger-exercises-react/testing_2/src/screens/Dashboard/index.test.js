@@ -15,7 +15,7 @@ describe('Dashboard', () => {
   });
   it('parent of the logo should be a header', () => {
     const wrapper = shallow(<Dashboard />);
-    expect(wrapper.find('.App-logo').parent()).is('header');
+    expect(wrapper.find('.App-logo').parent().is('header')).toEqual(true);
   });
   xit('componentDidMount is called once', () => {
   })
