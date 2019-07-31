@@ -20,7 +20,9 @@ describe('UserRow', () => {
     wrapper.find('button').simulate('click');
     expect(wrapper.find('button').children().equals('Activar')).toEqual(true);
   });
-  xit('executing toggleActive method changes isActive state', () => {
+  it('executing toggleActive method changes isActive state', () => {
     const wrapper = mount(<UserRow user={{ id: 1, name: 'James', active: true }} />);
+    wrapper.instance().toggleActive();
+    expect(wrapper.state().isActive).toEqual(false);
   });
 });
