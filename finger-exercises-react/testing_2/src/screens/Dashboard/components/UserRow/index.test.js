@@ -9,8 +9,11 @@ import UserRow from './index';
 configure({ adapter: new Adapter() });
 
 describe('UserRow', () => {
-  xit('button change text when state is changed', () => {
-    const wrapper = mount(<UserRow user={{ id:1, name: 'James', active: true }} />);
+  it('button change text when state is changed', () => {
+    const wrapper = shallow(<UserRow user={{ id: 1, name: 'James', active: true }} />);
+    expect(wrapper.find('button').children().equals('Desactivar')).toEqual(true);
+    wrapper.setState({ isActive: false });
+    expect(wrapper.find('button').children().equals('Activar')).toEqual(true);
   });
   xit('button change text when clicked', () => {
     const wrapper = mount(<UserRow user={{ id:1, name: 'James', active: true }} />);
