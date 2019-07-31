@@ -9,7 +9,7 @@ import UserList from './index';
 configure({ adapter: new Adapter() });
 
 describe('UserList', () => {
-  xit('shows new user when props are changed', () => {
+  it('shows new user when props are changed', () => {
     const users = [
       {
         id: 1,
@@ -22,7 +22,20 @@ describe('UserList', () => {
         active: false
       }
     ];
-    const wrapper = shallow(<UserList users={users}/>);
+    const newUser = {
+      id: 3,
+      name: 'User 3',
+      active: true
+    };
+    const wrapper = mount(<UserList users={users}/>);
+    expect(wrapper.props().users).toHaveLength(2);
+    wrapper.setProps({
+      users: [
+        ...users,
+        newUser
+      ]
+    });
+    expect(wrapper.props().users).toHaveLength(3);
   });
   it('setProps makes componentDidUpdate to be executed', () => {
     jest.spyOn(UserList.prototype, 'componentDidUpdate');
