@@ -18,8 +18,9 @@ describe('Dashboard', () => {
     expect(wrapper.find('.App-logo').parent().is('header')).toEqual(true);
   });
   it('componentDidMount is called once', () => {
-    const spy = jest.spyOn(console, 'log');
-    const wrapper = mount(<Dashboard />);
-    expect(spy).toHaveBeenCalledTimes(1);
+    jest.spyOn(Dashboard.prototype, 'componentDidMount');
+    mount(<Dashboard />);
+    expect(Dashboard.prototype.componentDidMount).toHaveBeenCalledTimes(1);
+    Dashboard.prototype.componentDidMount.mockRestore();
   })
 });
