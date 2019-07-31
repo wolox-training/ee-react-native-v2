@@ -10,7 +10,25 @@ configure({ adapter: new Adapter() });
 
 describe('UserList', () => {
   xit('shows new user when props are changed', () => {
+    const users = [
+      {
+        id: 1,
+        name: 'User 1',
+        active: true
+      },
+      {
+        id: 2,
+        name: 'User 2',
+        active: false
+      }
+    ];
+    const wrapper = shallow(<UserList users={users}/>);
   });
-  xit('setProps makes componentDidUpdate to be executed', () => {
+  it('setProps makes componentDidUpdate to be executed', () => {
+    jest.spyOn(UserList.prototype, 'componentDidUpdate');
+    const wrapper = mount(<UserList />);
+    wrapper.setProps({ hello: 'hello' });
+    expect(UserList.prototype.componentDidUpdate).toHaveBeenCalled();
+    UserList.prototype.componentDidUpdate.mockRestore();
   });
 });
