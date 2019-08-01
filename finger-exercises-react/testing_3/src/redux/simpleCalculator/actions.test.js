@@ -6,7 +6,8 @@ describe('Action --- Test simple calculator actions', () => {
     expect(add.type).toEqual(actions.ADD);
   });
 
-  xit('actionCreator SUBSTRACT', () => {
+  it('actionCreator SUBSTRACT', () => {
     const subtract = actionCreators.substract();
+    expect(subtract.type).toEqual(actions.SUBSTRACT);
   });
 });
