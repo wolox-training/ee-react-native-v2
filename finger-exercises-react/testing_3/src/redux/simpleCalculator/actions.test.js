@@ -3,9 +3,10 @@ import actionCreators, { actions } from './actions'
 describe('Action --- Test simple calculator actions', () => {
   it('actionCreator ADD', () => {
     const add = actionCreators.add();
+    expect(add.type).toEqual(actions.ADD);
   });
 
-  it('actionCreator SUBSTRACT', () => {
+  xit('actionCreator SUBSTRACT', () => {
     const subtract = actionCreators.substract();
   });
 });
